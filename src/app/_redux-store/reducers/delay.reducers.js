@@ -2,7 +2,8 @@ import {types} from '../actions/delay.actions';
 
 const defaultState = {
   fetching: false,
-  data: []
+  data: [],
+  minimumDelay: undefined
 };
 
 export default function delay(state = defaultState, action) {
@@ -17,33 +18,17 @@ export default function delay(state = defaultState, action) {
         error: action.error
       });
     case types.DELAYS_FETCH_SUCCESS:
-      return createDelayDataFromRawData(state, action);
+      return Object.assign({}, state, {
+        fetching: false,
+        data: action.data
+      });
+    case types.SET_FLIGHT_DATA_WITH_MINIMUM_DELAY:
+      return Object.assign({}, state, {
+        fetching: false,
+        minimumDelay: action.data
+      });
     default:
       return state;
   }
 }
-function createDelayDataFromRawData(state, action) {
-  let result = [];
-  const groupToValues = action.data.reduce((obj, item) => {
-    obj[item.FL_DATE] = obj[item.FL_DATE] || [];
-    obj[item.FL_DATE].push(item);
-    return obj;
-  }, {});
-  const groupToDistance = action.data.reduce((obj, item) => {
-    obj[item.DISTANCE] = obj[item.DISTANCE] || [];
-    obj[item.DISTANCE].push(item);
-    return obj;
-  }, {});
 
-  console.log(groupToValues);
-  console.log(groupToDistance);
-  result = action.data.map((value, index) => {
-    console.log(value);
-    return value;
-  });
-
-  return Object.assign({}, state, {
-    fetching: false,
-    data: result
-  });
-}

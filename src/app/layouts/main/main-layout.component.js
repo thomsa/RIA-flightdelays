@@ -3,7 +3,7 @@ import * as airportActions from '../../_redux-store/actions/airport.actions';
 
 class HomeController {
   /** @ngInject */
-  constructor($ngRedux, $scope, $state, riaAirportService) {
+  constructor($ngRedux, $scope, riaAirportService) {
     this.props = {};
     const unsubscribe = $ngRedux.connect(this.mapStateToThis,
       Object.assign({},
@@ -11,11 +11,6 @@ class HomeController {
         uiActions,
         riaAirportService))(this.props);
     $scope.$on('$destroy', unsubscribe);
-
-    this.props.getAllAirports();
-    console.log(this);
-
-    this.$state = $state;
   }
 
   mapStateToThis(state) {

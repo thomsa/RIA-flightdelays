@@ -9,14 +9,14 @@ class StartController {
         uiActions,
         stateActions))(this.props);
     $scope.$on('$destroy', unsubscribe);
-    console.log(this.props.router);
   }
+
   getStarteClick() {
     this.props.getStartedClicked();
     this.props.stateGo('main.selectAirports');
   }
+
   mapStateToThis(state) {
-    console.log(state);
     return {
       router: state.router,
       ui: state.ui,

@@ -21,7 +21,12 @@ exports.paths = {
   dist: 'dist',
   tmp: '.tmp',
   e2e: 'e2e',
-  tasks: 'gulp_tasks'
+  tasks: 'gulp_tasks',
+  ngConfig: {
+    dest: './src/app/_core/',
+    jsonDev: './conf/gulp.ng-config.json',
+    jsonDist: './conf/gulp.ng-config.dist.json'
+  }
 };
 
 /**
@@ -52,3 +57,4 @@ exports.errorHandler = function (title) {
     this.emit('end');
   };
 };
+

@@ -50,6 +50,7 @@
     "gulp-hub": "frankwallis/gulp-hub#d461b9c700df9010d0a8694e4af1fb96d9f38bf4",
     "gulp-insert": "^0.5.0",
     "gulp-ng-annotate": "^2.0.0",
+    "gulp-ng-config": "^1.4.0",
     "gulp-sass": "^3.1.0",
     "gulp-util": "^3.0.8",
     "html-loader": "^0.4.4",

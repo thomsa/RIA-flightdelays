@@ -57,6 +57,9 @@ module.exports = {
         postcss: () => [autoprefixer]
       },
       debug: true
+    }),
+    new webpack.DefinePlugin({
+      ENV: require(path.join(__dirname, './env', 'dev.js'))
     })
   ],
   devtool: 'source-map',

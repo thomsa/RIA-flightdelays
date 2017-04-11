@@ -7,7 +7,10 @@ const webpackDistConf = require('../conf/webpack-dist.conf');
 const gulpConf = require('../conf/gulp.conf');
 const browsersync = require('browser-sync');
 
+
+
 gulp.task('webpack:dev', done => {
+  process.env.NODE_ENV = 'development';
   webpackWrapper(false, webpackConf, done);
 });
 

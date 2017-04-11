@@ -12,22 +12,14 @@ class AirportSearchInputController {
         riaAirportService,
         riaDelaysService))(this.props);
     $scope.$on('$destroy', unsubscribe);
-
-    if (!this.props.airports.allAirports.length) {
-      this.props.getAllAirports();
-    }
+  }
+  getItems() {
+    return this.items;
   }
 
   setSelectedAirport(item) {
     if (this.type === 'origin') {
-      this.props.setOriginAirport(item);
       this.props.getConnectedAirports(item);
-    } else if (this.type === 'destination') {
-      this.props.setDestinationAirport(item);
-    }
-    console.log(this);
-    if (this.props.airports.selectedOrigin && this.props.airports.selectedDestination) {
-      this.props.getDelayData(this.props.airports.selectedOrigin.code, this.props.airports.selectedDestination.code);
     }
   }
 
@@ -47,6 +39,9 @@ export default angular.module('ria.components.airport-search-input', [])
     bindings: {
       type: '@',
       placeHolder: '@',
-      ngDisabled: '='
+      ngDisabled: '=',
+      model: '=',
+      items: '=',
+      notFoundMessage: '@'
     }
   }).name;

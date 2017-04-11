@@ -4,15 +4,12 @@ class PlaneController {
   constructor($rootScope, $ngRedux, $scope, $document) {
     this.props = {};
     this.$rootScope = $rootScope;
-    this.$ngRedux = $ngRedux;
-    this.$scope = $scope;
     this.$document = $document;
-    const unsubscribe = this.$ngRedux.connect(this.mapStateToThis, {})(this.props);
-    this.$scope.$on('$destroy', unsubscribe);
-    console.log(this);
+    const unsubscribe = $ngRedux.connect(this.mapStateToThis, {})(this.props);
+    $scope.$on('$destroy', unsubscribe);
   }
   $onInit() {
-    this.$rootScope.$on('$stateChangeSuccess', (event, toState, toParams, fromState, fromParams) => {
+    this.$rootScope.$on('$stateChangeSuccess', (event, toState) => {
       this.$document.ready(() => {
         if (!this.landThePlane && toState.name !== 'main.start') {
           this.landThePlane = true;

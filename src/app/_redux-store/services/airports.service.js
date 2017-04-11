@@ -1,7 +1,7 @@
 import * as airportActions from '../../_redux-store/actions/airport.actions';
 const basePath = '/data/';
 
- /** @ngInject */
+/** @ngInject */
 export function AirportService($http, $q, $log) {
   function getAllAirports() {
     return (dispatch, getState) => {
@@ -10,7 +10,12 @@ export function AirportService($http, $q, $log) {
         method: 'GET',
         url: basePath + ('/airport_lookup/airports.json')
       }).then(response => {
-        dispatch(airportActions.receiveAirports(response.data));
+        const result = response.data.map(element => {
+          const newElement = element;
+          newElement.display = element.name + ', ' + element.country_name + ', ' + element.code;
+          return newElement;
+        });
+        dispatch(airportActions.receiveAirports(result));
       }, error => {
         dispatch(airportActions.airportsError(error));
       });
@@ -26,11 +31,20 @@ export function AirportService($http, $q, $log) {
           url: basePath + ('/airport_lookup/connected_airports.json')
         }).then(response => {
           const connectedAirports = response.data[originAirport.code];
-          dispatch(airportActions.receiveConnectedAirports(connectedAirports));
+          if (connectedAirports) {
+            const state = getState();
+            const result = state.airport.allAirports.filter(element => {
+              return connectedAirports.includes(element.code);
+            });
+            dispatch(airportActions.receiveConnectedAirports(result));
+          } else {
+            dispatch(airportActions.receiveConnectedAirports([]));
+          }
         }, error => {
           dispatch(airportActions.connectedAirportsError(error));
         });
       } else {
+        dispatch(airportActions.setDestinationAirport(undefined));
         dispatch(airportActions.receiveConnectedAirports(undefined));
       }
     };
@@ -43,6 +57,6 @@ export function AirportService($http, $q, $log) {
 }
 
 export default angular
-    .module('ria-airport-service-module', [])
-    .factory('riaAirportService', AirportService).name;
+  .module('ria-airport-service-module', [])
+  .factory('riaAirportService', AirportService).name;
 

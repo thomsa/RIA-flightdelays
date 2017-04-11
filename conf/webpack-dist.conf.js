@@ -8,6 +8,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const pkg = require('../package.json');
 const autoprefixer = require('autoprefixer');
 
+
 module.exports = {
   module: {
     loaders: [
@@ -63,6 +64,9 @@ module.exports = {
       options: {
         postcss: () => [autoprefixer]
       }
+    }),
+    new webpack.DefinePlugin({
+      ENV: require(path.join(__dirname, './env', 'dist.js'))
     })
   ],
   output: {

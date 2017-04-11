@@ -1,25 +1,18 @@
 import * as uiActions from '../_redux-store/actions/ui.actions';
-import * as stateActions from 'redux-ui-router';
 
 class ResultsController {
   /** @ngInject */
-  constructor($ngRedux, $scope, $state, $stateParams, riaDelaysService) {
+  constructor($ngRedux, $scope, riaDelaysService, months) {
     this.props = {};
+    this.months = months;
     const unsubscribe = $ngRedux.connect(this.mapStateToThis,
       Object.assign({},
         uiActions,
         riaDelaysService,
-        stateActions))(this.props);
+        months
+        ))(this.props);
     $scope.$on('$destroy', unsubscribe);
 
-    console.log(this);
-
-    this.$state = $state;
-
-    if ($stateParams.origin && $stateParams.dest) {
-      this.props.getDelayData($stateParams.origin, $stateParams.dest);
-    }
-    console.log(this.props);
     this.chart = {
       chart: {
         type: 'column'
@@ -102,11 +95,34 @@ class ResultsController {
       }
     };
   }
+  $onInit() {
+    if (this.props.router.currentParams.originCode && this.props.router.currentParams.destinationCode) {
+      this.props.getDelayData(this.props.router.currentParams.originCode, this.props.router.currentParams.destinationCode);
+    }
+  }
 
   mapStateToThis(state) {
+    let monthToTravel;
+    let dayToTravel;
+    if (state.delay && state.delay.minimumDelay) {
+      dayToTravel = new Date(state.delay.minimumDelay.FL_DATE).getDate();
+      // TODO: MOVE THIS OUT TO A SERVICE
+      const Calendar = new Date();
+      const currentMonth = Calendar.getMonth();    // Returns month (0-11)
+      const today = Calendar.getDate();    // Returns day (1-31)
+
+      if (dayToTravel >= today) {
+        monthToTravel = this.months[currentMonth];
+      } else {
+        monthToTravel = this.months[currentMonth + 1];
+      }
+    }
     return {
+      dayToTravel,
+      monthToTravel,
       ui: state.ui,
-      delays: state.delay
+      delays: state.delay,
+      router: state.router
     };
   }
 }

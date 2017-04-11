@@ -1,21 +1,37 @@
 <div layout="row" layout-align="center center" class="animated bounceInUp">
-<div flex="60">
-  <md-card style="background-color:rgba(255,255,255,0.95)" >
-    <md-card-title>
-      <md-card-title-text>
-        <span class="md-headline">Let us know where you are travelling to!</span>
-        <p>We will provide you details when to book your next flight to <strong>avoid delays</strong>.</p>
-      </md-card-title-text>
-    </md-card-title>
-    <md-card-content layout="row" layout-sm="column" layout-align="center center" flex>
-      <ria-airport-search-input type="origin" flex place-holder="Your starting point" class="right-30"></ria-airport-search-input>
-      <ria-airport-search-input flex ng-disabled="!ctrl.props.airports.selectedOrigin || (ctrl.props.airports.connectedAirports.length === 0)"
-        type="destination" place-holder="Your destination">
-      </ria-airport-search-input>
-    </md-card-content>
-    <md-card-actions layout="row" layout-align="end center">
-      <md-button class="md-primary big-button">Show Me!</md-button>
-    </md-card-actions>
-  </md-card>
-</div>
+  <div flex="100" flex-gt-sm="60">
+    <md-card style="background-color:rgba(255,255,255,0.95)">
+      <md-card-title>
+        <md-card-title-text>
+          <span class="md-headline">Let us know where you are travelling to!</span>
+          <p>We will provide you details when to book your next flight to <strong>avoid delays</strong>.</p>
+        </md-card-title-text>
+      </md-card-title>
+      <md-card-content layout-gt-sm="row" layout="column" layout-align="" layout-align-gt-sm="center center" flex>
+        <ria-airport-search-input 
+        type="origin" 
+        flex 
+        items="ctrl.props.airports.allAirports"
+        model="ctrl.props.airports.selectedOrigin"
+        place-holder="Your starting point"
+        ng-class="{'right-30': ctrl.$mdMedia('gt-sm'), 'bottom-50': ctrl.$mdMedia('max-width: 960px') }"
+        not-found-message="No such airport was found in our database" ></ria-airport-search-input>
+        <ria-airport-search-input 
+        model="ctrl.props.airports.selectedDestination"
+        flex 
+        items="ctrl.props.airports.connectedAirports"
+        ng-disabled="!ctrl.props.airports.selectedOrigin || !ctrl.props.airports.connectedAirports"
+        type="destination" 
+        place-holder="Your destination"
+        not-found-message="{{ctrl.getNotFoundMessageForDest()}}">
+        </ria-airport-search-input>
+        </md-card-content>
+      <md-card-actions layout="row" layout-align-gt-sm="end center" layout-align="center center">
+        <md-button
+        class="md-primary big-button" 
+        ng-click="ctrl.submit()"
+        ng-disabled="!ctrl.props.airports.selectedOrigin || !ctrl.props.airports.selectedDestination">Show Me!</md-button>
+      </md-card-actions>
+    </md-card>
+  </div>
 </div>

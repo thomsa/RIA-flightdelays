@@ -1,12 +1,13 @@
  <div>
  <md-autocomplete 
           ng-disabled="ctrl.ngDisabled" 
+          md-no-cache="true"
           md-search-text="ctrl.searchText" 
           md-search-text-change="ctrl.searchTextChange(ctrl.searchText)"
-          md-selected-item="ctrl.selectedItem" 
+          md-selected-item="ctrl.model" 
           md-selected-item-change="ctrl.setSelectedAirport(item)" 
-          md-items="item in ctrl.props.airports.allAirports"
-          md-item-text="item.code" 
+          md-items="item in ctrl.items"
+          md-item-text="item.display" 
           md-min-length="0" 
           placeholder="{{ctrl.placeHolder}}" 
           md-menu-class="autocomplete-custom-template">
@@ -16,12 +17,11 @@
             </span>
             <span class="item-metadata">
             <span>
-              <italic>{{item.code}}</italict>
+              <oblique>{{item.code}}</oblique>
             </span>            
           </md-item-template>
           <md-not-found>
-            No such airports were found in our database.
-            <a ng-click="ctrl.newState(ctrl.searchText)">Create a new one!</a>
+            {{ctrl.notFoundMessage}}
           </md-not-found>
         </md-autocomplete>
 </div>
