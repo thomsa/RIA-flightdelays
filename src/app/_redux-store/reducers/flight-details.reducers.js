@@ -1,4 +1,4 @@
-import {types} from '../actions/delay.actions';
+import {types} from '../actions/flight-details.actions';
 
 const defaultState = {
   fetching: false,
@@ -8,16 +8,16 @@ const defaultState = {
 
 export default function delay(state = defaultState, action) {
   switch (action.type) {
-    case types.DELAYS_FETCH:
+    case types.FLIGHT_DETAILS_FETCH:
       return Object.assign({}, state, {
         fetching: true
       });
-    case types.DELAYS_FETCH_ERROR:
+    case types.FLIGHT_DETAILS_FETCH_ERROR:
       return Object.assign({}, state, {
         fetching: false,
         error: action.error
       });
-    case types.DELAYS_FETCH_SUCCESS:
+    case types.FLIGHT_DETAILS_FETCH_SUCCESS:
       return Object.assign({}, state, {
         fetching: false,
         data: action.data

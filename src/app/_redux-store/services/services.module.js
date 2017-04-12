@@ -1,8 +1,8 @@
 import airportsService from './airports.service';
-import delayssService from './delays.service';
+import flightDetailsService from './flightDetails.Service';
 
 export default angular
   .module('ria.services.module', [
     airportsService,
-    delayssService
+    flightDetailsService
   ]).name;

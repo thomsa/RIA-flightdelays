@@ -20,7 +20,7 @@ class StartController {
     return {
       router: state.router,
       ui: state.ui,
-      delays: state.delay
+      flightDetails: state.delay
     };
   }
 }

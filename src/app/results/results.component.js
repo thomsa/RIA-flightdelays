@@ -2,13 +2,13 @@ import * as uiActions from '../_redux-store/actions/ui.actions';
 
 class ResultsController {
   /** @ngInject */
-  constructor($ngRedux, $scope, riaDelaysService, months) {
+  constructor($ngRedux, $scope, riaFlightDetailsService, months) {
     this.props = {};
     this.months = months;
     const unsubscribe = $ngRedux.connect(this.mapStateToThis,
       Object.assign({},
         uiActions,
-        riaDelaysService,
+        riaFlightDetailsService,
         months
         ))(this.props);
     $scope.$on('$destroy', unsubscribe);
@@ -121,7 +121,7 @@ class ResultsController {
       dayToTravel,
       monthToTravel,
       ui: state.ui,
-      delays: state.delay,
+      flightDetails: state.delay,
       router: state.router
     };
   }

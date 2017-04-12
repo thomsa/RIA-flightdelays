@@ -3,14 +3,14 @@ import * as airportActions from '../../_redux-store/actions/airport.actions';
 
 class AirportSearchInputController {
   /** @ngInject */
-  constructor($ngRedux, $scope, riaAirportService, riaDelaysService) {
+  constructor($ngRedux, $scope, riaAirportService, riaFlightDetailsService) {
     this.props = {};
     const unsubscribe = $ngRedux.connect(this.mapStateToThis,
       Object.assign({},
         airportActions,
         uiActions,
         riaAirportService,
-        riaDelaysService))(this.props);
+        riaFlightDetailsService))(this.props);
     $scope.$on('$destroy', unsubscribe);
   }
   getItems() {

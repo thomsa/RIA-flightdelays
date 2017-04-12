@@ -1,11 +1,11 @@
-import * as delayActions from '../../_redux-store/actions/delay.actions';
+import * as flightDetailsActions from '../../_redux-store/actions/flight-details.actions';
 const basePath = '/data/';
 
 /** @ngInject */
-export function DelaysService($http, $q, $log) {
+export function FlightDetailsService($http, $q, $log) {
   function getDelayData(origin, destination) {
     return (dispatch, getState) => {
-      dispatch(delayActions.fetchStart());
+      dispatch(flightDetailsActions.fetchStart());
       $http({
         method: 'GET',
         url: basePath + (origin + '_' + destination + '.json')
@@ -25,10 +25,10 @@ export function DelaysService($http, $q, $log) {
         const min = response.data.reduce((prev, current) => {
           return (prev.ARR_DELAY < current.ARR_DELAY) ? prev : current;
         });
-        dispatch(delayActions.setFlightDataWithMiniumumDelay(min));
-        dispatch(delayActions.receive(response.data));
+        dispatch(flightDetailsActions.setFlightDataWithMiniumumDelay(min));
+        dispatch(flightDetailsActions.receive(response.data));
       }, error => {
-        dispatch(delayActions.error(error));
+        dispatch(flightDetailsActions.error(error));
       });
     };
   }
@@ -41,7 +41,7 @@ export function DelaysService($http, $q, $log) {
       }).then(response => {
         console.table(response.data);
       }, error => {
-        dispatch(delayActions.error(error));
+        dispatch(flightDetailsActions.error(error));
       });
     };
   }
@@ -53,4 +53,4 @@ export function DelaysService($http, $q, $log) {
 
 export default angular
     .module(name, [])
-    .factory('riaDelaysService', DelaysService).name;
+    .factory('riaFlightDetailsService', FlightDetailsService).name;

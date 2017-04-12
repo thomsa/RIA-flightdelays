@@ -4,7 +4,7 @@ import thunkMiddleware from 'redux-thunk';
 
 import reduxStore from './redux-store';
 import airportService from './services/airports.service';
-import delaysService from './services/delays.service';
+import flightDetailsService from './services/flight-details.service';
 
 const enhancer = [];
 if (ENV.__DEBUG__) {
@@ -16,7 +16,7 @@ export default angular
     ngRedux,
     ngReduxUiRouter,
     airportService,
-    delaysService
+    flightDetailsService
   ])
   .config($ngReduxProvider => {
     $ngReduxProvider.createStoreWith(reduxStore, [thunkMiddleware, 'ngUiRouterMiddleware'], enhancer);

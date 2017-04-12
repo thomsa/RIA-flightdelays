@@ -17,7 +17,7 @@ class HomeController {
     return {
       airports: state.airport,
       ui: state.ui,
-      delays: state.delay
+      flightDetails: state.delay
     };
   }
 }
