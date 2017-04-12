@@ -1,6 +1,6 @@
 import * as uiActions from '../_redux-store/actions/ui.actions';
 import * as stateActions from 'redux-ui-router';
-class ResultsController {
+class ChartResultsController {
   /** @ngInject */
   constructor($ngRedux, $scope, riaFlightDetailsService, $stateParams) {
     this.$stateParams = $stateParams;
@@ -47,8 +47,8 @@ class ResultsController {
 }
 
 export default {
-  template: require('./results.template.html'),
-  controller: ResultsController,
+  template: require('./chart-results.template.html'),
+  controller: ChartResultsController,
   controllerAs: 'ctrl',
   bindings: {
     layout: '@',

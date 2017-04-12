@@ -3,9 +3,9 @@ import {types} from '../actions/flight-details.actions';
 const defaultState = {
   error: undefined,
   fetching: false,
-  data: [],
+  data: undefined,
   minimumDelay: undefined,
-  delayDistanceData: []
+  delayDistanceData: undefined
 };
 
 export default function flightDetails(state = defaultState, action) {

@@ -12,6 +12,7 @@ import layouts from './layouts';
 import start from './start';
 import airportSelect from './airport-select';
 import results from './results';
+import chartResults from './chart-results';
 
 angular
   .module('riaApp', [
@@ -27,7 +28,8 @@ angular
     layouts,
     start,
     airportSelect,
-    results
+    results,
+    chartResults
   ]);
 
 angular.element(document)

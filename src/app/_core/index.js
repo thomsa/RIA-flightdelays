@@ -10,7 +10,7 @@ import 'angular-ui-router/release/stateEvents';
 /**
  * 3rd PARTY IMPORTS
  */
-import highChartsng from 'highcharts-ng';
+import highChartsng from '../../vendor/js/highcharts-ng';
 
 // reusable custom modules
 import config from './core.config';

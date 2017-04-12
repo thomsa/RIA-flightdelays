@@ -1,8 +1,1 @@
-
-<img src="/assets/images/airplane.svg" 
-    class="plane" 
-    ng-class="{'land' : ctrl.ui.status === 'GET_STARTED_CLICKED', 
-    'turn-right' : ctrl.ui.planeStatus >= 2, 
-    'takeoff' : ctrl.ui.planeStatus >= 3
-    }" />
-
+<highchart id="chart1" config="ctrl.chart" style="width:100%"></highchart>
