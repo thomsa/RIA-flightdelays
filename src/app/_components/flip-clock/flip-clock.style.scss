@@ -26,22 +26,7 @@
     .flip--bottom {
         overflow: hidden;
     }
-    .flip--top {
-        animation: flip 1000ms ease-in-out infinite;
-        transform-origin: bottom;
-        height: 50%;
-        border-radius: 6px 6px 0 0;
-        z-index: 2;
-        backface-visibility: hidden;
-    }
-    .flip--back {
-        animation: flip-back 1000ms ease-in-out infinite;
-        line-height: 0;
-        transform-origin: top;
-        transform: rotateX(180deg);
-        margin-top: 60px;
-        border-radius: 0 0 6px 6px;
-    }
+
     .flip--bottom {
         height: 50%;
         margin-top: 60px;

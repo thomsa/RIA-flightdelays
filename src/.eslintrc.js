@@ -8,9 +8,10 @@ module.exports = {
     'angular/log' :1,
     'angular/document-service':1,
     'angular/window-service':1,
-    'no-loop-func' : 0
+    'no-loop-func' : 0,
   },
   globals: { 
-    "ENV": true 
+    "ENV": true,
+    "Highcharts" :true
   }
 }

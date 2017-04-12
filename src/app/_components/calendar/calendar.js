@@ -1,7 +1,8 @@
+import * as globals from '../../_core/core.globals';
 class CalendarController {
    /** @ngInject */
-  constructor(months) {
-    this.months = months;
+  constructor() {
+    this.months = globals.MONTHS;
   }
 
   $onInit() {

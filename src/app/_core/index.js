@@ -1,4 +1,5 @@
 import 'angular-material/angular-material.min.css';
+import 'highcharts-ng/dist/highcharts-ng.css';
 import 'jquery';
 
 // ANGULAR IMPORTS

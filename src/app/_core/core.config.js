@@ -3,11 +3,11 @@ export default config;
 /** @ngInject */
 function config($stateProvider, $urlRouterProvider, $locationProvider) {
   $locationProvider.html5Mode(true).hashPrefix('!');
-  $urlRouterProvider.otherwise('404');
+  $urlRouterProvider.otherwise('/not-found');
 
   $stateProvider
-    .state('404', {
-      url: '/404',
-      component: 'app'
+    .state('notFound', {
+      url: '/not-found',
+      templateUrl: './not-found-template/HTTP404.html'
     });
 }

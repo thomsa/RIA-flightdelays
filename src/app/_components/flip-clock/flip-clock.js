@@ -5,7 +5,7 @@ class FlipClockController {
 }
 
 export default angular.module('ria.components.flip-clock', [])
-  .component('flipClock', {
+  .component('riaFlipClock', {
     template: require('./flip-clock.html'),
     controller: FlipClockController,
     controllerAs: 'ctrl',

@@ -1,0 +1,130 @@
+.plane {
+    width: 500px;
+    height: 500px;
+    position: absolute;
+    z-index: 100000;
+    transition:  3s ease;
+    transition-property: top, left, width, height, transform;
+    position: fixed;
+    left: 0;
+    top: 80%;
+    &.land {
+        left: 80%;
+        top: 25px;
+        width: 150px;
+        height: 150px;
+        &.turn-right {
+            transform: rotate(45deg);
+            &.takeoff {
+                animation: slide 3s linear infinite;
+            }
+        }
+    }
+}
+
+@keyframes slide {
+    0% {
+        left: 80%
+    }
+    20% {
+        left: 110%;
+    }
+    21% {
+        top: -150;
+    }
+    25% {
+        left: -10%;
+        display: none;
+    }
+    100% {
+        left: 80%;
+    }
+}
+
+@-webkit-keyframes slide-right {
+    from {
+        margin-left: 100%;
+        width: 300%;
+    }
+    to {
+        margin-left: 0%;
+        width: 100%;
+    }
+}
+
+@-moz-keyframes slide-right {
+    from {
+        margin-left: 100%;
+        width: 300%;
+    }
+    to {
+        margin-left: 0%;
+        width: 100%;
+    }
+}
+
+@-o-keyframes slide-right {
+    from {
+        margin-left: 100%;
+        width: 300%;
+    }
+    to {
+        margin-left: 0%;
+        width: 100%;
+    }
+}
+
+@keyframes slide-right {
+    from {
+        margin-left: 100%;
+        width: 300%;
+    }
+    to {
+        margin-left: 0%;
+        width: 100%;
+    }
+}
+
+@-webkit-keyframes slide-left {
+    from {
+        margin-left: 0%;
+        width: 100%;
+    }
+    to {
+        margin-left: -100%;
+        width: 300%;
+    }
+}
+
+@-moz-keyframes slide-left {
+    from {
+        margin-left: 0%;
+        width: 100%;
+    }
+    to {
+        margin-left: -100%;
+        width: 300%;
+    }
+}
+
+@-o-keyframes slide-left {
+    from {
+        margin-left: 0%;
+        width: 100%;
+    }
+    to {
+        margin-left: -100%;
+        width: 300%;
+    }
+}
+
+@keyframes slide-left {
+    from {
+        margin-left: 0%;
+        width: 100%;
+    }
+    to {
+        margin-left: -100%;
+        width: 300%;
+    }
+}

@@ -6,6 +6,7 @@
 
 import plane from './plane/plane.component';
 import airportSearch from './airport-search-input/airport-search-input.component';
+import delayRatioChart from './delay-ratio-chart/delay-ratio-chart.component';
 import drillDownChart from './drill-down-chart/drill-down-chart.component';
 import calendar from './calendar/calendar';
 import flipClock from './flip-clock/flip-clock';
@@ -16,6 +17,7 @@ export default angular
     drillDownChart,
     plane,
     calendar,
-    flipClock
+    flipClock,
+    delayRatioChart
   ]).name;
 

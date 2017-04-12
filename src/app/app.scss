@@ -43,10 +43,12 @@ display: none;
 @import url(https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css);
 @import url(https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css);
 
+
 /* component imports automatic with gulp task */
 /* inject:scss */
 @import '/_components/airport-search-input/airport-search-input.style';
 @import '/_components/calendar/calendar.style';
+@import '/_components/delay-ratio-chart/delay-ratio-chart.style';
 @import '/_components/drill-down-chart/drill-down-chart.style';
 @import '/_components/flip-clock/flip-clock.style';
 @import '/_components/plane/plane.style';
