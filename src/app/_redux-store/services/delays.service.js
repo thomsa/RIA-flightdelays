@@ -21,14 +21,25 @@ export function DelaysService($http, $q, $log) {
           obj[item.DISTANCE].push(item);
           return obj;
         }, {});
-
         // get object with minimum delay time
         const min = response.data.reduce((prev, current) => {
           return (prev.ARR_DELAY < current.ARR_DELAY) ? prev : current;
         });
-
         dispatch(delayActions.setFlightDataWithMiniumumDelay(min));
         dispatch(delayActions.receive(response.data));
+      }, error => {
+        dispatch(delayActions.error(error));
+      });
+    };
+  }
+
+  function getAvarageDelayByDistance() {
+    return (dispatch, getState) => {
+      $http({
+        method: 'GET',
+        url: basePath + ('delay_distance/delay_distance.json')
+      }).then(response => {
+        console.table(response.data);
       }, error => {
         dispatch(delayActions.error(error));
       });
