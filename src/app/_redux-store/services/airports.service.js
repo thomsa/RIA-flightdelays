@@ -45,7 +45,7 @@ export function AirportService($http, $q, $log) {
         });
       } else {
         dispatch(airportActions.setDestinationAirport(undefined));
-        dispatch(airportActions.receiveConnectedAirports(undefined));
+        dispatch(airportActions.receiveConnectedAirports([]));
       }
     };
   }

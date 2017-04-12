@@ -72,7 +72,7 @@ export function filterOriginAirport(query) {
 
 export function filterDestinationAirport(query) {
   return {
-    type: types.filter,
+    type: types.FILTER_DESTINATION_AIRPORTS,
     query
   };
 }

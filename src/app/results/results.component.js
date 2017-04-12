@@ -1,15 +1,15 @@
 import * as uiActions from '../_redux-store/actions/ui.actions';
-
+import * as stateActions from 'redux-ui-router';
 class ResultsController {
   /** @ngInject */
-  constructor($ngRedux, $scope, riaFlightDetailsService, months) {
+  constructor($ngRedux, $scope, riaFlightDetailsService, $stateParams) {
+    this.$stateParams = $stateParams;
     this.props = {};
-    this.months = months;
     const unsubscribe = $ngRedux.connect(this.mapStateToThis,
       Object.assign({},
         uiActions,
         riaFlightDetailsService,
-        months
+        stateActions
         ))(this.props);
     $scope.$on('$destroy', unsubscribe);
 
@@ -96,8 +96,8 @@ class ResultsController {
     };
   }
   $onInit() {
-    if (this.props.router.currentParams.originCode && this.props.router.currentParams.destinationCode) {
-      this.props.getFlightData(this.props.router.currentParams.originCode, this.props.router.currentParams.destinationCode);
+    if (this.$stateParams.originCode && this.$stateParams.destinationCode) {
+      this.props.getFlightData(this.$stateParams.originCode, this.$stateParams.destinationCode);
     }
   }
 

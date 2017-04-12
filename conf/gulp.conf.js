@@ -16,6 +16,7 @@ exports.ngModule = 'app';
 /**
  *  The main paths of your project handle these with care
  */
+const clientPath = 'src';
 exports.paths = {
   src: 'src',
   dist: 'dist',
@@ -26,7 +27,9 @@ exports.paths = {
     dest: './src/app/_core/',
     jsonDev: './conf/gulp.ng-config.json',
     jsonDist: './conf/gulp.ng-config.dist.json'
-  }
+  },
+  styles: [`${clientPath}/{app,components}/**/*.scss`],
+  mainStyle: `${clientPath}/app/app.scss`
 };
 
 /**

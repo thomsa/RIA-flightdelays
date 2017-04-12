@@ -2,7 +2,8 @@
  <md-autocomplete 
           ng-disabled="ctrl.ngDisabled" 
           md-no-cache="true"
-          md-search-text="ctrl.searchText" 
+          md-search-text="ctrl.searchText"
+          md-selected-item="ctrl.model"
           md-search-text-change="ctrl.searchTextChange(ctrl.searchText)"
           md-selected-item-change="ctrl.setSelectedAirport(item)" 
           md-items="item in ctrl.items"

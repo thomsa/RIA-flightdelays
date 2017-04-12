@@ -31,14 +31,26 @@ $light-gray : rgb(240, 240, 240);
   }
 }
 
+body {
+  font-family: 'Dosis';
+  font-size: 1.4em;
+}
+
+.md-scroll-mask {
+display: none;
+}
+
 @import url(https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css);
 @import url(https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css);
 
-/* component imports */
-@import "./layouts/main/main-layout.style";
-@import "./results/results.style";
-/* @import "./app/containers/destination-select/destination-select.style";*/
-@import "./_components/plane/plane.style";
-/*@import "./app/components/airport-search-input/airport-search-input.style"; */
-@import "./_components/calendar/calendar.style";
-@import "./_components/flip-clock/flip-clock.style";
+/* component imports automatic with gulp task */
+/* inject:scss */
+@import '/_components/airport-search-input/airport-search-input.style';
+@import '/_components/calendar/calendar.style';
+@import '/_components/drill-down-chart/drill-down-chart.style';
+@import '/_components/flip-clock/flip-clock.style';
+@import '/_components/plane/plane.style';
+@import '/layouts/main/main-layout.style';
+@import '/results/results.style';
+@import '/start/start.style';
+/* endinject */
