@@ -1,16 +1,29 @@
-<div flex>
-  <md-card style="background-color:rgba(255,255,255,0.95)" flex>
-    <md-card-title>
-      <md-card-title-text>
-        <span class="md-headline">Your best chance to avoid delays is on <span>15th of April</span> at <span>11:35</span></span>
-      </md-card-title-text>
-    </md-card-title>
-    <md-card-content flex layout layout-sm="column" layout-align="center center">
-      <ria-calendar flex day="15"></ria-calendar>
-      <p>{{ctrl.props.flightDetails.minimumDelay}}</p>
-    </md-card-content>
-    <md-card-actions layout="row" layout-align="end center">
-      <md-button class="md-primary big-button">How do we know?</md-button>
-    </md-card-actions>
-  </md-card>
+<div layout="row" layout-align="center center" class="animated bounceInUp">
+  <div flex="100" flex-gt-sm="60">
+    <md-card style="background-color:rgba(255,255,255,0.95)" flex>
+      <md-card-title>
+        <md-card-title-text>
+          <span ng-hide="ctrl.props.flightDetails.fetching" class="md-headline">Your best chance to avoid delays is on <span>15th of April</span>          at <span>11:35</span></span>
+           <span ng-show="!ctrl.props.flightDetails.fetching && ctrl.props.flightDetails.error" 
+           class="md-headline">Your best chance to avoid delays is on <span>15th of April</span>          at <span>11:35</span></span>
+        </md-card-title-text>
+      </md-card-title>
+      <md-card-content flex layout layout-sm="row" layout-align="center center">
+        <div layout="row" layout-sm="column" layout-align="space-around" flex>
+          <md-progress-circular md-mode="indeterminate" ng-show="ctrl.props.flightDetails.fetching"></md-progress-circular>
+        </div>
+        <div flex>
+        <h2>We are sorry, it seems that we don't have the neccessary data to show you details between these two airports.</h2>  
+        </div>
+        
+        <h1 flex><i class="fa fa-frown-o" aria-hidden="true"></i></h1>
+        
+        <!--<ria-calendar flex day="15"></ria-calendar>
+      <p>{{ctrl.props.flightDetails.minimumDelay}}</p>-->
+      </md-card-content>
+      <md-card-actions layout="row" layout-align="end center">
+        <md-button class="md-primary big-button" ng-hide="ctrl.props.flightDetails.fetching">How do we know?</md-button>
+      </md-card-actions>
+    </md-card>
+  </div>
 </div>

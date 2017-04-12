@@ -97,7 +97,7 @@ class ResultsController {
   }
   $onInit() {
     if (this.props.router.currentParams.originCode && this.props.router.currentParams.destinationCode) {
-      this.props.getDelayData(this.props.router.currentParams.originCode, this.props.router.currentParams.destinationCode);
+      this.props.getFlightData(this.props.router.currentParams.originCode, this.props.router.currentParams.destinationCode);
     }
   }
 
@@ -121,7 +121,7 @@ class ResultsController {
       dayToTravel,
       monthToTravel,
       ui: state.ui,
-      flightDetails: state.delay,
+      flightDetails: state.flightDetails,
       router: state.router
     };
   }

@@ -13,13 +13,20 @@ class AirportSearchInputController {
         riaFlightDetailsService))(this.props);
     $scope.$on('$destroy', unsubscribe);
   }
-  getItems() {
-    return this.items;
-  }
 
+  searchTextChange(searchText) {
+    if (this.type === 'origin') {
+      this.props.filterOriginAirport(searchText);
+    } else if (this.type === 'destination') {
+      this.props.filterDestinationAirport(searchText);
+    }
+  }
   setSelectedAirport(item) {
     if (this.type === 'origin') {
+      this.props.setOriginAirport(item);
       this.props.getConnectedAirports(item);
+    } else if (this.type === 'destination') {
+      this.props.setDestinationAirport(item);
     }
   }
 

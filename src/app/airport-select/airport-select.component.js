@@ -11,7 +11,8 @@ class AirportSelectController {
         stateActions,
         riaAirportService))(this.props);
     $scope.$on('$destroy', unsubscribe);
-
+  }
+  $onInit() {
     if (!this.props.airports.allAirports.length) {
       this.props.getAllAirports();
     }

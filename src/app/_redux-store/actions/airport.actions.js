@@ -6,7 +6,9 @@ export const types = {
   CONNECTED_AIRPORTS_FETCH_ERROR: 'CONNECTED_AIRPORTS_FETCH_ERROR',
   CONNECTED_AIRPORTS_FETCH_SUCCESS: 'CONNECTED_AIRPORTS_FETCH_SUCCESS',
   SET_ORIGIN_AIRPORT: 'SET_ORIGIN_AIRPORT',
-  SET_DESTINATION_AIRPORT: 'SET_DESTINATION_AIRPORT'
+  SET_DESTINATION_AIRPORT: 'SET_DESTINATION_AIRPORT',
+  FILTER_ORIGIN_AIRPORTS: 'FILTER_ORIGIN_AIRPORTS',
+  FILTER_DESTINATION_AIRPORTS: 'FILTER_DESTINATION_AIRPORTS'
 };
 
 export function receiveAirports(data) {
@@ -58,5 +60,19 @@ export function setDestinationAirport(airport) {
   return {
     type: types.SET_DESTINATION_AIRPORT,
     airport
+  };
+}
+
+export function filterOriginAirport(query) {
+  return {
+    type: types.FILTER_ORIGIN_AIRPORTS,
+    query
+  };
+}
+
+export function filterDestinationAirport(query) {
+  return {
+    type: types.filter,
+    query
   };
 }

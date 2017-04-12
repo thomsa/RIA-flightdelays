@@ -18,9 +18,7 @@ class StartController {
 
   mapStateToThis(state) {
     return {
-      router: state.router,
-      ui: state.ui,
-      flightDetails: state.delay
+      ui: state.ui
     };
   }
 }
