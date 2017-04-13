@@ -11,38 +11,38 @@ export const types = {
   FILTER_DESTINATION_AIRPORTS: 'FILTER_DESTINATION_AIRPORTS'
 };
 
-export function receiveAirports(data) {
+function receiveAirports(data) {
   return {
     type: types.AIRPORTS_FETCH_SUCCESS,
     data
   };
 }
-export function fetchAirportsStart() {
+function fetchAirportsStart() {
   return {
     type: types.AIRPORTS_FETCH
   };
 }
 
-export function airportsError(error) {
+function airportsError(error) {
   return {
     type: types.AIRPORTS_FETCH_SUCCESS,
     error
   };
 }
 
-export function receiveConnectedAirports(data) {
+function receiveConnectedAirports(data) {
   return {
     type: types.CONNECTED_AIRPORTS_FETCH_SUCCESS,
     data
   };
 }
-export function fetchConnectedAirportsStart() {
+function fetchConnectedAirportsStart() {
   return {
     type: types.CONNECTED_AIRPORTS_FETCH
   };
 }
 
-export function connectedAirportsError(error) {
+function connectedAirportsError(error) {
   return {
     type: types.CONNECTED_AIRPORTS_FETCH_ERROR,
     error
@@ -74,5 +74,62 @@ export function filterDestinationAirport(query) {
   return {
     type: types.FILTER_DESTINATION_AIRPORTS,
     query
+  };
+}
+
+const basePath = '/data';
+
+/** @ngInject */
+export default function AirportService($http, $q) {
+  function getAllAirports() {
+    return dispatch => {
+      dispatch(fetchAirportsStart());
+      $http({
+        method: 'GET',
+        url: `${basePath}/airport_lookup/airports.json`
+      }).then(response => {
+        const result = response.data.map(element => {
+          const newElement = element;
+          newElement.display = element.name + ', ' + element.country_name + ', ' + element.code;
+          return newElement;
+        });
+        dispatch(receiveAirports(result));
+      }, error => {
+        dispatch(airportsError(error));
+      });
+    };
+  }
+
+  function getConnectedAirports(originAirport) {
+    return (dispatch, getState) => {
+      if (originAirport) {
+        dispatch(fetchConnectedAirportsStart());
+        $http({
+          method: 'GET',
+          url: `${basePath}/airport_lookup/connected_airports.json`
+        }).then(response => {
+          const connectedAirports = response.data[originAirport.code];
+          if (connectedAirports) {
+            const state = getState();
+            const result = state.airport.allAirports.filter(element => {
+              return connectedAirports.includes(element.code);
+            });
+            dispatch(receiveConnectedAirports(result));
+          } else {
+            dispatch(receiveConnectedAirports([]));
+          }
+        }, error => {
+          dispatch(connectedAirportsError(error));
+        });
+      } else {
+        dispatch(setDestinationAirport(undefined));
+        dispatch(receiveConnectedAirports([]));
+      }
+    };
+  }
+
+  return {
+    getAllAirports,
+    getConnectedAirports
   };
 }
