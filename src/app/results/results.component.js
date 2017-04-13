@@ -6,6 +6,7 @@ import * as stateActions from 'redux-ui-router';
 class ResultsController {
   /** @ngInject */
   constructor($ngRedux, $scope, riaFlightDetailsService, $stateParams) {
+    this.ROUTES = globals.ROUTES;
     this.$stateParams = $stateParams;
     this.props = {};
     const unsubscribe = $ngRedux.connect(this.mapStateToThis,
@@ -18,7 +19,7 @@ class ResultsController {
   }
 
   goToChart() {
-    this.props.stateGo('main.chartResults', {
+    this.props.stateGo(globals.ROUTES.FLIGHT_RESULTS_CHART_PAGE, {
       originCode: this.$stateParams.originCode,
       destinationCode: this.$stateParams.destinationCode
     });

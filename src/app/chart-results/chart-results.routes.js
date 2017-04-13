@@ -1,9 +1,10 @@
+import {ROUTES} from '../_core/core.globals';
 export default routesConfig;
 
 /** @ngInject */
 function routesConfig($stateProvider) {
   $stateProvider
-    .state('main.chartResults', {
+    .state(ROUTES.FLIGHT_RESULTS_CHART_PAGE, {
       url: '/results-chart/:originCode/:destinationCode',
       component: 'riaChartResults',
       resolve: {

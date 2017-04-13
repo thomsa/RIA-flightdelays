@@ -33,7 +33,7 @@
 
       <md-card-actions layout="row" layout-align-gt-sm="end center" layout-align="center center">
         <md-button class="md-primary big-button" ng-class="{'animated pulse infinite md-raised' : ctrl.props.flightDetails.error}"
-          ng-if="!ctrl.props.flightDetails.fetching" ng-click="ctrl.props.stateGo('main.selectAirports')">Let me search again</md-button>
+          ng-if="!ctrl.props.flightDetails.fetching" ng-click="ctrl.props.stateGo(ctrl.ROUTES.AIRPORT_SEARCH_PAGE)">Let me search again</md-button>
         <md-button class="md-raised md-warn big-button  animated pulse infinite" ng-click="ctrl.goToChart()" ng-if="!ctrl.props.flightDetails.fetching && !ctrl.props.flightDetails.error">How do we know?</md-button>
       </md-card-actions>
     </md-card>

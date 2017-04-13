@@ -1,9 +1,10 @@
+import {ROUTES} from '../_core/core.globals';
 export default routesConfig;
 
 /** @ngInject */
 function routesConfig($stateProvider) {
   $stateProvider
-    .state('main.results', {
+    .state(ROUTES.FLIGHT_RESULTS_PAGE, {
       url: '/results/:originCode/:destinationCode',
       component: 'riaResults',
       resolve: {

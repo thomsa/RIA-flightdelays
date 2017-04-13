@@ -24,7 +24,7 @@
         <md-button 
           class="md-primary big-button" ng-class="{'animated pulse infinite md-raised' : ctrl.props.flightDetails.error}"
           ng-if="!ctrl.props.flightDetails.fetching"
-          ng-click="ctrl.props.stateGo('main.selectAirports')" >Let me search again</md-button>
+          ng-click="ctrl.props.stateGo(ctrl.ROUTES.AIRPORT_SEARCH_PAGE)" >Let me search again</md-button>
       </md-card-actions>
     </md-card>
   </div>

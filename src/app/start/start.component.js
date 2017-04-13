@@ -1,3 +1,4 @@
+import {ROUTES} from '../_core/core.globals';
 import * as uiActions from '../_redux-store/actions/ui.actions';
 import * as stateActions from 'redux-ui-router';
 class StartController {
@@ -13,7 +14,7 @@ class StartController {
 
   getStarteClick() {
     this.props.getStartedClicked();
-    this.props.stateGo('main.selectAirports');
+    this.props.stateGo(ROUTES.AIRPORT_SEARCH_PAGE);
   }
 
   mapStateToThis(state) {

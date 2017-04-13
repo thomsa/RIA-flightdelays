@@ -1,9 +1,10 @@
+import {ROUTES} from '../_core/core.globals';
 export default routesConfig;
 
 /** @ngInject */
 function routesConfig($stateProvider) {
   $stateProvider
-    .state('main.start', {
+    .state(ROUTES.START_PAGE, {
       url: '/',
       component: 'riaStart',
       resolve: {

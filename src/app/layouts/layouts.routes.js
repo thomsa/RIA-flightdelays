@@ -1,3 +1,4 @@
+import {ROUTES} from '../_core/core.globals';
 export default routesConfig;
 
 /** @ngInject */
@@ -6,7 +7,7 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider) {
   $urlRouterProvider.otherwise('/');
 
   $stateProvider
-    .state('main', {
+    .state(ROUTES.MAIN_LAYOUT, {
       abstract: true,
       component: 'riaMainLayout',
       resolve: {

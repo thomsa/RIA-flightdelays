@@ -1,8 +1,10 @@
+import {ROUTES} from '../_core/core.globals';
 import * as uiActions from '../_redux-store/actions/ui.actions';
 import * as stateActions from 'redux-ui-router';
 class ChartResultsController {
   /** @ngInject */
   constructor($ngRedux, $scope, riaFlightDetailsService, $stateParams) {
+    this.ROUTES = ROUTES;
     this.$stateParams = $stateParams;
     this.props = {};
     const unsubscribe = $ngRedux.connect(this.mapStateToThis,

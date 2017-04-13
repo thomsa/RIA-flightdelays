@@ -1,5 +1,7 @@
+import {ROUTES} from '../_core/core.globals';
 import * as uiActions from '../_redux-store/actions/ui.actions';
 import * as stateActions from 'redux-ui-router';
+
 class AirportSelectController {
   /** @ngInject */
   constructor($ngRedux, $scope, $mdMedia, riaAirportService) {
@@ -19,7 +21,7 @@ class AirportSelectController {
   }
   submit() {
     if (this.props.airports.selectedOrigin && this.props.airports.selectedDestination) {
-      this.props.stateGo('main.results',
+      this.props.stateGo(ROUTES.FLIGHT_RESULTS_PAGE,
         {
           originCode: this.props.airports.selectedOrigin.code,
           destinationCode: this.props.airports.selectedDestination.code
@@ -32,10 +34,7 @@ class AirportSelectController {
     }
     return 'No such airport was found in our database';
   }
-  getStarteClick() {
-    this.props.getStartedClicked();
-    this.props.stateGo('main.test');
-  }
+
   mapStateToThis(state) {
     return {
       airports: state.airport,
