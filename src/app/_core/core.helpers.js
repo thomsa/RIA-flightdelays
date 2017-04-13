@@ -9,3 +9,14 @@ export function getReadableTimeFromInt(number) {
   }
   return null;
 }
+
+export function groupFlightDetailsToDate(flightData) {
+  if (flightData) {
+    return flightData.reduce((obj, item) => {
+      obj[item.FL_DATE] = obj[item.FL_DATE] || [];
+      obj[item.FL_DATE].push(item);
+      return obj;
+    }, {});
+  }
+  return null;
+}
