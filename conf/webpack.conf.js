@@ -26,8 +26,7 @@ module.exports = {
         loaders: [
           'style-loader',
           'css-loader',
-          'sass-loader',
-          'postcss-loader'
+          'sass-loader'
         ]
       },
       {
@@ -58,12 +57,15 @@ module.exports = {
         postcss: () => [autoprefixer]
       },
       debug: true
+    }),
+    new webpack.DefinePlugin({
+      ENV: require(path.join(__dirname, './env', 'dev.js'))
     })
   ],
   devtool: 'source-map',
   output: {
     path: path.join(process.cwd(), conf.paths.tmp),
-    filename: 'index.js'
+    filename: 'app.js'
   },
-  entry: `./${conf.path.src('index')}`
+  entry: `./src/app/app.js`
 };

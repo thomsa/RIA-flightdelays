@@ -1,0 +1,6 @@
+{
+  "plugins": [
+    "protractor"
+  ],
+  "extends": "plugin:protractor/recommended"
+}

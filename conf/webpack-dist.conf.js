@@ -8,6 +8,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const pkg = require('../package.json');
 const autoprefixer = require('autoprefixer');
 
+
 module.exports = {
   module: {
     loaders: [
@@ -27,7 +28,7 @@ module.exports = {
         test: /\.(css|scss)$/,
         loaders: ExtractTextPlugin.extract({
           fallback: 'style-loader',
-          use: 'css-loader?minimize!sass-loader!postcss-loader'
+          use: 'css-loader?minimize!sass-loader'
         })
       },
       {
@@ -63,6 +64,14 @@ module.exports = {
       options: {
         postcss: () => [autoprefixer]
       }
+    }),
+    new webpack.DefinePlugin({
+      ENV: require(path.join(__dirname, './env', 'dist.js'))
+    }),
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: JSON.stringify('production')
+      }
     })
   ],
   output: {
@@ -70,7 +79,7 @@ module.exports = {
     filename: '[name]-[hash].js'
   },
   entry: {
-    app: `./${conf.path.src('index')}`,
+    app: `./src/app/app.js`,
     vendor: Object.keys(pkg.dependencies)
   }
 };

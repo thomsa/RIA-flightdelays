@@ -1,0 +1,91 @@
+.header {
+    background-color: $black;
+}
+.logo-text {
+    font-family: 'Leckerli One', cursive;
+    font-size:38px;
+}
+.destionation-search {
+    background-color: $blue;
+}
+
+
+.md-button.big-button {
+    min-width: 200px;
+    min-height: 70px;
+    line-height: 70px;
+}
+
+@keyframes moveUp {
+    0% {
+    transform: translate(0);
+    }
+    100% {
+    transform: rotate(-100vh);
+    }
+}
+
+.origin-search{
+   
+    text-align: center;
+   // background-color:  #efefef;
+      .title{
+        font-family: 'Lobster', cursive;
+        display: inline-block;
+        text-align: center;
+        .main {
+         color: #630079; 
+         font-family: "Lobster",cursive;
+          font-size: 165px;
+           line-height: 160px; 
+           font-weight: normal; 
+            margin-bottom: 0px;
+             margin-top: 40px; 
+             text-align: center;
+              text-shadow: 0 1px 1px rgb(137, 137, 137); 
+
+
+        }   
+        .sub{
+            font-size: 48px;
+            line-height: 0;
+        }
+    }
+}
+
+[ui-view].main.ng-enter, [ui-view].ng-leave {
+  position: absolute;
+  left: 0;
+  right: 0;
+  transition:all 0.5s linear;
+}
+
+
+[ui-view].main.ng-leave {
+  transform: translateY(0);
+}
+
+[ui-view].main.ng-leave-active {
+  transform: translateY(-100%);
+}
+
+.content-wrapper {
+    background-image:    url('/assets/images/bg.svg');
+    background-size:     cover;                      
+    background-repeat:   no-repeat;
+    background-position: center center;  
+    overflow-x: hidden;
+}
+
+md-toolbar.top-bar {
+    height:100px;
+    background-color:#e25422;
+    box-shadow : 0px 4px 20px 0px black;
+}
+
+footer {
+    z-index: 1;
+    font-size:10px;
+    text-align: center;
+    box-shadow : 0px -1px 20px 0px black;
+}

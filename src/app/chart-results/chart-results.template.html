@@ -1,0 +1,31 @@
+<div layout="row" layout-align="center center" class="animated bounceInUp">
+  <div flex="100">
+    <md-card style="background-color:rgba(255,255,255,0.95)">
+      <md-card-title layout="column" layout-align="center center">
+        <md-card-title-text>
+          <h2>{{ctrl.$stateParams.originCode}} - {{ctrl.$stateParams.destinationCode}}</h2>
+        </md-card-title-text>
+      </md-card-title>
+      <md-card-content layout="column">
+        <div layout="row" layout-sm="column" layout-align="center center">
+          <md-progress-circular md-mode="indeterminate" ng-show="ctrl.props.flightDetails.fetching"></md-progress-circular>
+        </div>
+        <div layout="column" layout-align="center center" ng-if="ctrl.props.flightDetails.error" class="animated fadeInDown">
+          <h3 style="text-align:center">We are sorry, it seems we don't have the neccessary data to show you the details between these two airports.</h3>
+          <i style="font-size:5em;" class="fa fa-frown-o" aria-hidden="true"></i>
+        </div>
+        <div layout="column" ng-if="ctrl.props.flightDetails.data" layout-align="center center">
+          <p>According to our data you can expect the following delay times on your flight per each day. You can click on a day to see the details by each flight!</p>
+          <ria-drill-down-chart chart-data="ctrl.props.flightDetails.data"></ria-drill-down-chart>
+          <ria-delay-ratio-chart chart-data="ctrl.props.flightDetails.data"></ria-delay-ratio-chart>
+        </div>
+      </md-card-content>
+      <md-card-actions layout="row" layout-align-gt-sm="end center" layout-align="center center">
+        <md-button 
+          class="md-primary big-button" ng-class="{'animated pulse infinite md-raised' : ctrl.props.flightDetails.error}"
+          ng-if="!ctrl.props.flightDetails.fetching"
+          ng-click="ctrl.props.stateGo(ctrl.ROUTES.AIRPORT_SEARCH_PAGE)" >Let me search again</md-button>
+      </md-card-actions>
+    </md-card>
+  </div>
+</div>

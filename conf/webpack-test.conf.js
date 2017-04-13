@@ -1,4 +1,6 @@
 const webpack = require('webpack');
+const path = require('path');
+
 module.exports = {
   module: {
     loaders: [
@@ -11,15 +13,17 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: 'eslint-loader',
-        enforce: 'pre'
-      },
-      {
-        test: /\.js$/,
-        exclude: /node_modules/,
         loaders: [
           'ng-annotate-loader',
           'babel-loader'
+        ]
+      },
+      {
+        test: /\.(css|scss)$/,
+        loaders: [
+          'style-loader',
+          'css-loader',
+          'sass-loader'
         ]
       },
       {
@@ -34,6 +38,9 @@ module.exports = {
     new webpack.LoaderOptionsPlugin({
       options: {},
       debug: true
+    }),
+    new webpack.DefinePlugin({
+      ENV: require(path.join(__dirname, './env', 'test.js'))
     })
   ],
   devtool: 'source-map'

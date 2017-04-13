@@ -1,0 +1,22 @@
+<div class="calendar">
+  <div class="month">
+    <ul>
+      <li>
+        {{ctrl.nextTravelData.monthText}}
+      </li>
+    </ul>
+  </div>
+  <ul class="weekdays">
+    <li>Mo</li>
+    <li>Tu</li>
+    <li>We</li>
+    <li>Th</li>
+    <li>Fr</li>
+    <li>Sa</li>
+    <li>Su</li>
+  </ul>
+  <ul class="days">
+    <li ng-repeat="item in ctrl.startingDayOfTheMonth track by $index"> </li>
+    <li ng-repeat="item in ctrl.daysInMonth track by $index" ng-class="{active : (($index + 1) == ctrl.nextTravelData.day)}">{{$index + 1}}</li>
+  </ul>
+</div>

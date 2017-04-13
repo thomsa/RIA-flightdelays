@@ -1,0 +1,881 @@
+{
+  "ABQ": [
+    "LAX",
+    "OAK",
+    "SAN",
+    "SFO"
+  ],
+  "ACV": [
+    "SFO"
+  ],
+  "ANC": [
+    "LAX",
+    "SFO"
+  ],
+  "ASE": [
+    "LAX",
+    "SFO"
+  ],
+  "ATL": [
+    "LAX",
+    "OAK",
+    "SAN",
+    "SFO",
+    "SJC",
+    "SMF",
+    "SNA"
+  ],
+  "AUS": [
+    "LAX",
+    "LGB",
+    "OAK",
+    "SAN",
+    "SFO",
+    "SJC",
+    "SNA"
+  ],
+  "BDL": [
+    "LAX"
+  ],
+  "BFL": [
+    "DEN",
+    "PHX",
+    "SFO"
+  ],
+  "BNA": [
+    "LAX",
+    "OAK",
+    "SAN",
+    "SFO"
+  ],
+  "BOI": [
+    "LAX",
+    "OAK",
+    "SAN",
+    "SFO",
+    "SMF"
+  ],
+  "BOS": [
+    "LAX",
+    "LGB",
+    "SAN",
+    "SFO",
+    "SJC"
+  ],
+  "BUF": [
+    "LAX"
+  ],
+  "BUR": [
+    "DAL",
+    "DEN",
+    "JFK",
+    "LAS",
+    "OAK",
+    "PDX",
+    "PHX",
+    "SEA",
+    "SFO",
+    "SJC",
+    "SLC",
+    "SMF"
+  ],
+  "BWI": [
+    "LAX",
+    "OAK",
+    "SAN",
+    "SFO",
+    "SJC",
+    "SMF"
+  ],
+  "BZN": [
+    "LAX",
+    "SFO"
+  ],
+  "CLE": [
+    "LAX",
+    "SFO"
+  ],
+  "CLT": [
+    "LAX",
+    "SAN",
+    "SFO",
+    "SMF"
+  ],
+  "CMH": [
+    "LAX",
+    "OAK"
+  ],
+  "COS": [
+    "LAX"
+  ],
+  "CVG": [
+    "LAX",
+    "SFO"
+  ],
+  "DAL": [
+    "BUR",
+    "LAX",
+    "OAK",
+    "ONT",
+    "SAN",
+    "SFO",
+    "SJC",
+    "SMF",
+    "SNA"
+  ],
+  "DCA": [
+    "LAX",
+    "SFO"
+  ],
+  "DEN": [
+    "BFL",
+    "BUR",
+    "FAT",
+    "LAX",
+    "OAK",
+    "ONT",
+    "PSP",
+    "SAN",
+    "SBA",
+    "SFO",
+    "SJC",
+    "SMF",
+    "SNA"
+  ],
+  "DFW": [
+    "FAT",
+    "LAX",
+    "ONT",
+    "PSP",
+    "SAN",
+    "SFO",
+    "SJC",
+    "SMF",
+    "SNA"
+  ],
+  "DTW": [
+    "LAX",
+    "SAN",
+    "SFO"
+  ],
+  "EGE": [
+    "LAX"
+  ],
+  "ELP": [
+    "LAX"
+  ],
+  "EUG": [
+    "LAX",
+    "SFO"
+  ],
+  "EWR": [
+    "LAX",
+    "SAN",
+    "SFO",
+    "SNA"
+  ],
+  "FAT": [
+    "DEN",
+    "DFW",
+    "LAX",
+    "PDX",
+    "PHX",
+    "SAN",
+    "SEA",
+    "SFO",
+    "SLC"
+  ],
+  "FCA": [
+    "LAX",
+    "SFO"
+  ],
+  "FLL": [
+    "LAX",
+    "SAN",
+    "SFO"
+  ],
+  "GEG": [
+    "LAX",
+    "OAK"
+  ],
+  "HDN": [
+    "LAX",
+    "SAN",
+    "SFO"
+  ],
+  "HNL": [
+    "LAX",
+    "OAK",
+    "SAN",
+    "SFO",
+    "SJC",
+    "SMF"
+  ],
+  "HOU": [
+    "LAX",
+    "OAK",
+    "SAN",
+    "SNA"
+  ],
+  "IAD": [
+    "LAX",
+    "SAN",
+    "SFO",
+    "SMF"
+  ],
+  "IAH": [
+    "LAX",
+    "PSP",
+    "SAN",
+    "SFO",
+    "SJC",
+    "SMF",
+    "SNA"
+  ],
+  "IND": [
+    "LAX",
+    "SFO"
+  ],
+  "ITO": [
+    "LAX"
+  ],
+  "JAC": [
+    "LAX",
+    "SFO"
+  ],
+  "JFK": [
+    "BUR",
+    "LAX",
+    "LGB",
+    "OAK",
+    "PSP",
+    "SAN",
+    "SFO",
+    "SJC",
+    "SMF"
+  ],
+  "KOA": [
+    "LAX",
+    "OAK",
+    "SAN",
+    "SFO",
+    "SJC"
+  ],
+  "LAS": [
+    "BUR",
+    "LAX",
+    "LGB",
+    "OAK",
+    "ONT",
+    "SAN",
+    "SFO",
+    "SJC",
+    "SMF",
+    "SNA"
+  ],
+  "LAX": [
+    "ABQ",
+    "ANC",
+    "ASE",
+    "ATL",
+    "AUS",
+    "BDL",
+    "BNA",
+    "BOI",
+    "BOS",
+    "BUF",
+    "BWI",
+    "BZN",
+    "CLE",
+    "CLT",
+    "CMH",
+    "COS",
+    "CVG",
+    "DAL",
+    "DCA",
+    "DEN",
+    "DFW",
+    "DTW",
+    "EGE",
+    "ELP",
+    "EUG",
+    "EWR",
+    "FAT",
+    "FCA",
+    "FLL",
+    "GEG",
+    "HDN",
+    "HNL",
+    "HOU",
+    "IAD",
+    "IAH",
+    "IND",
+    "ITO",
+    "JAC",
+    "JFK",
+    "KOA",
+    "LAS",
+    "LIH",
+    "LWS",
+    "MCI",
+    "MCO",
+    "MDW",
+    "MEM",
+    "MIA",
+    "MKE",
+    "MRY",
+    "MSP",
+    "MSY",
+    "MTJ",
+    "OAK",
+    "OGG",
+    "OKC",
+    "OMA",
+    "ORD",
+    "PDX",
+    "PHL",
+    "PHX",
+    "PIT",
+    "PSP",
+    "RDM",
+    "RDU",
+    "RNO",
+    "SAN",
+    "SAT",
+    "SBA",
+    "SBP",
+    "SEA",
+    "SFO",
+    "SJC",
+    "SLC",
+    "SMF",
+    "STL",
+    "SUN",
+    "TPA",
+    "TUS"
+  ],
+  "LGB": [
+    "AUS",
+    "BOS",
+    "JFK",
+    "LAS",
+    "OAK",
+    "PDX",
+    "RNO",
+    "SEA",
+    "SFO",
+    "SJC",
+    "SLC",
+    "SMF"
+  ],
+  "LIH": [
+    "LAX",
+    "OAK",
+    "SAN",
+    "SFO",
+    "SJC"
+  ],
+  "MCI": [
+    "LAX",
+    "OAK",
+    "SAN",
+    "SFO",
+    "SNA"
+  ],
+  "MCO": [
+    "LAX",
+    "SAN",
+    "SFO"
+  ],
+  "MDW": [
+    "LAX",
+    "OAK",
+    "ONT",
+    "SAN",
+    "SFO",
+    "SJC",
+    "SMF",
+    "SNA"
+  ],
+  "MEM": [
+    "LAX"
+  ],
+  "MFR": [
+    "SFO"
+  ],
+  "MIA": [
+    "LAX",
+    "SAN",
+    "SFO"
+  ],
+  "MKE": [
+    "LAX",
+    "SAN",
+    "SFO"
+  ],
+  "MMH": [
+    "SFO"
+  ],
+  "MRY": [
+    "LAX",
+    "PHX",
+    "SFO"
+  ],
+  "MSP": [
+    "LAX",
+    "PSP",
+    "SAN",
+    "SFO",
+    "SJC",
+    "SMF",
+    "SNA"
+  ],
+  "MSY": [
+    "LAX",
+    "OAK",
+    "SAN",
+    "SFO"
+  ],
+  "MTJ": [
+    "LAX",
+    "SFO"
+  ],
+  "OAK": [
+    "ABQ",
+    "ATL",
+    "AUS",
+    "BNA",
+    "BOI",
+    "BUR",
+    "BWI",
+    "CMH",
+    "DAL",
+    "DEN",
+    "GEG",
+    "HNL",
+    "HOU",
+    "JFK",
+    "KOA",
+    "LAS",
+    "LAX",
+    "LGB",
+    "LIH",
+    "MCI",
+    "MDW",
+    "MSY",
+    "OGG",
+    "ONT",
+    "PDX",
+    "PHX",
+    "RNO",
+    "SAN",
+    "SEA",
+    "SLC",
+    "SNA",
+    "STL"
+  ],
+  "OGG": [
+    "LAX",
+    "OAK",
+    "SAN",
+    "SFO",
+    "SJC",
+    "SMF"
+  ],
+  "OKC": [
+    "LAX",
+    "SFO"
+  ],
+  "OMA": [
+    "LAX",
+    "SFO"
+  ],
+  "ONT": [
+    "DAL",
+    "DEN",
+    "DFW",
+    "LAS",
+    "MDW",
+    "OAK",
+    "PDX",
+    "PHX",
+    "PSP",
+    "SEA",
+    "SFO",
+    "SJC",
+    "SLC",
+    "SMF"
+  ],
+  "ORD": [
+    "LAX",
+    "PSP",
+    "SAN",
+    "SFO",
+    "SJC",
+    "SMF",
+    "SNA"
+  ],
+  "OTH": [
+    "SFO"
+  ],
+  "PDX": [
+    "BUR",
+    "FAT",
+    "LAX",
+    "LGB",
+    "OAK",
+    "ONT",
+    "PSP",
+    "SAN",
+    "SBA",
+    "SFO",
+    "SJC",
+    "SMF",
+    "SNA"
+  ],
+  "PHL": [
+    "LAX",
+    "SAN",
+    "SFO"
+  ],
+  "PHX": [
+    "BFL",
+    "BUR",
+    "FAT",
+    "LAX",
+    "MRY",
+    "OAK",
+    "ONT",
+    "PSP",
+    "SAN",
+    "SBA",
+    "SBP",
+    "SFO",
+    "SJC",
+    "SMF",
+    "SNA"
+  ],
+  "PIT": [
+    "LAX",
+    "SFO"
+  ],
+  "PSC": [
+    "SFO"
+  ],
+  "PSP": [
+    "DEN",
+    "DFW",
+    "IAH",
+    "JFK",
+    "LAX",
+    "MSP",
+    "ORD",
+    "PDX",
+    "PHX",
+    "SEA",
+    "SFO",
+    "SLC"
+  ],
+  "RDD": [
+    "SFO"
+  ],
+  "RDM": [
+    "LAX",
+    "SFO"
+  ],
+  "RDU": [
+    "LAX",
+    "SFO"
+  ],
+  "RNO": [
+    "LAX",
+    "LGB",
+    "OAK",
+    "SAN",
+    "SFO"
+  ],
+  "SAN": [
+    "ABQ",
+    "ATL",
+    "AUS",
+    "BNA",
+    "BOI",
+    "BOS",
+    "BWI",
+    "CLT",
+    "DAL",
+    "DEN",
+    "DFW",
+    "DTW",
+    "EWR",
+    "FAT",
+    "FLL",
+    "HDN",
+    "HNL",
+    "HOU",
+    "IAD",
+    "IAH",
+    "JFK",
+    "KOA",
+    "LAS",
+    "LAX",
+    "LIH",
+    "MCI",
+    "MCO",
+    "MDW",
+    "MIA",
+    "MKE",
+    "MSP",
+    "MSY",
+    "OAK",
+    "OGG",
+    "ORD",
+    "PDX",
+    "PHL",
+    "PHX",
+    "RNO",
+    "SAT",
+    "SEA",
+    "SFO",
+    "SJC",
+    "SLC",
+    "SMF",
+    "STL",
+    "TUS"
+  ],
+  "SAT": [
+    "LAX",
+    "SAN",
+    "SFO"
+  ],
+  "SBA": [
+    "DEN",
+    "LAX",
+    "PDX",
+    "PHX",
+    "SEA",
+    "SFO"
+  ],
+  "SBP": [
+    "LAX",
+    "PHX",
+    "SFO"
+  ],
+  "SEA": [
+    "BUR",
+    "FAT",
+    "LAX",
+    "LGB",
+    "OAK",
+    "ONT",
+    "PSP",
+    "SAN",
+    "SBA",
+    "SFO",
+    "SJC",
+    "SMF",
+    "SNA"
+  ],
+  "SFO": [
+    "ABQ",
+    "ACV",
+    "ANC",
+    "ASE",
+    "ATL",
+    "AUS",
+    "BFL",
+    "BNA",
+    "BOI",
+    "BOS",
+    "BUR",
+    "BWI",
+    "BZN",
+    "CLE",
+    "CLT",
+    "CVG",
+    "DAL",
+    "DCA",
+    "DEN",
+    "DFW",
+    "DTW",
+    "EUG",
+    "EWR",
+    "FAT",
+    "FCA",
+    "FLL",
+    "HDN",
+    "HNL",
+    "IAD",
+    "IAH",
+    "IND",
+    "JAC",
+    "JFK",
+    "KOA",
+    "LAS",
+    "LAX",
+    "LGB",
+    "LIH",
+    "MCI",
+    "MCO",
+    "MDW",
+    "MFR",
+    "MIA",
+    "MKE",
+    "MMH",
+    "MRY",
+    "MSP",
+    "MSY",
+    "MTJ",
+    "OGG",
+    "OKC",
+    "OMA",
+    "ONT",
+    "ORD",
+    "OTH",
+    "PDX",
+    "PHL",
+    "PHX",
+    "PIT",
+    "PSC",
+    "PSP",
+    "RDD",
+    "RDM",
+    "RDU",
+    "RNO",
+    "SAN",
+    "SAT",
+    "SBA",
+    "SBP",
+    "SEA",
+    "SLC",
+    "SMF",
+    "SNA",
+    "STL",
+    "SUN",
+    "TUS",
+    "XNA"
+  ],
+  "SJC": [
+    "ATL",
+    "AUS",
+    "BOS",
+    "BUR",
+    "BWI",
+    "DAL",
+    "DEN",
+    "DFW",
+    "HNL",
+    "IAH",
+    "JFK",
+    "KOA",
+    "LAS",
+    "LAX",
+    "LGB",
+    "LIH",
+    "MDW",
+    "MSP",
+    "OGG",
+    "ONT",
+    "ORD",
+    "PDX",
+    "PHX",
+    "SAN",
+    "SEA",
+    "SLC",
+    "SNA"
+  ],
+  "SLC": [
+    "BUR",
+    "FAT",
+    "LAX",
+    "LGB",
+    "OAK",
+    "ONT",
+    "PSP",
+    "SAN",
+    "SFO",
+    "SJC",
+    "SMF",
+    "SNA"
+  ],
+  "SMF": [
+    "ATL",
+    "BOI",
+    "BUR",
+    "BWI",
+    "CLT",
+    "DAL",
+    "DEN",
+    "DFW",
+    "HNL",
+    "IAD",
+    "IAH",
+    "JFK",
+    "LAS",
+    "LAX",
+    "LGB",
+    "MDW",
+    "MSP",
+    "OGG",
+    "ONT",
+    "ORD",
+    "PDX",
+    "PHX",
+    "RNO",
+    "SAN",
+    "SEA",
+    "SFO",
+    "SLC",
+    "SNA"
+  ],
+  "SNA": [
+    "ATL",
+    "AUS",
+    "DAL",
+    "DEN",
+    "DFW",
+    "EWR",
+    "HOU",
+    "IAH",
+    "LAS",
+    "MCI",
+    "MDW",
+    "MSP",
+    "OAK",
+    "ORD",
+    "PDX",
+    "PHX",
+    "SEA",
+    "SFO",
+    "SJC",
+    "SLC",
+    "SMF",
+    "STL"
+  ],
+  "STL": [
+    "LAX",
+    "OAK",
+    "SAN",
+    "SFO",
+    "SNA"
+  ],
+  "SUN": [
+    "LAX",
+    "SFO"
+  ],
+  "TPA": [
+    "LAX"
+  ],
+  "TUS": [
+    "LAX",
+    "SAN",
+    "SFO"
+  ],
+  "TWF": [
+    "LAX",
+    "SFO"
+  ],
+  "XNA": [
+    "SFO"
+  ]
+}

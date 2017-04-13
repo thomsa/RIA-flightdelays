@@ -1,0 +1,35 @@
+<div layout="row" layout-align="center center" class="animated bounceInUp">
+  <div flex="100" flex-gt-sm="60">
+    <md-card style="background-color:rgba(255,255,255,0.95)">
+      <md-card-title>
+        <md-card-title-text>
+          <span class="md-headline">Let us know where you are travelling to!</span>
+          <p>We will provide you details when to book your next flight to <strong>avoid delays</strong>.</p>
+        </md-card-title-text>
+      </md-card-title>
+      <md-card-content layout-gt-sm="row" layout="column" layout-align="" layout-align-gt-sm="center center" flex>
+        <ria-airport-search-input type="origin" 
+        flex
+        model="ctrl.props.airports.selectedOrigin"
+        items="ctrl.props.airports.filteredOriginAirports"
+        place-holder="Your starting point"
+        ng-class="{'right-30': ctrl.$mdMedia('gt-sm'), 'bottom-50': ctrl.$mdMedia('max-width: 960px') }"
+        not-found-message="No such airport was found in our database"></ria-airport-search-input>
+        <ria-airport-search-input flex 
+        model="ctrl.props.airports.selectedDestination"
+        items="ctrl.props.airports.filteredDestinationAirports"
+        ng-disabled="!ctrl.props.airports.selectedOrigin"
+        type="destination" 
+        place-holder="Your destination"
+        not-found-message="{{ctrl.getNotFoundMessageForDest()}}">
+        </ria-airport-search-input>
+        </md-card-content>
+      <md-card-actions layout="row" layout-align-gt-sm="end center" layout-align="center center">
+        <md-button
+        class="md-primary big-button" 
+        ng-click="ctrl.submit()"
+        ng-disabled="!ctrl.props.airports.selectedOrigin || !ctrl.props.airports.selectedDestination">Show Me!</md-button>
+      </md-card-actions>
+    </md-card>
+  </div>
+</div>
