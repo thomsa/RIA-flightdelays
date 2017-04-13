@@ -67,6 +67,11 @@ module.exports = {
     }),
     new webpack.DefinePlugin({
       ENV: require(path.join(__dirname, './env', 'dist.js'))
+    }),
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: JSON.stringify('production')
+      }
     })
   ],
   output: {
