@@ -18,19 +18,16 @@
         layout-align="space-around" 
         ng-if="!ctrl.props.flightDetails.fetching && ctrl.props.flightDetails.minimumDelay">
           <div flex="100" flex-gt-sm="50">
-            <p style="font-size:2.5em;text-align:justify;" class="right-20">Your best chance to have the shortest flight is on <strong>{{ctrl.props.dayToTravel}}</strong> of <strong>{{ctrl.props.monthToTravel}}</strong> at <strong>{{ctrl.props.timeToTravel}}</strong></p>
+            <p style="font-size:2.5em;text-align:justify;" class="right-20">Your best chance to have the shortest flight is on <strong>{{ctrl.props.nextTravel.day}}</strong> of <strong>{{ctrl.props.nextTravel.monthText}}</strong> at <strong>{{ctrl.props.nextTravel.time}}</strong></p>
           </div>
           <div flex>
             <ria-flip-clock layout="row" layout-align="center" 
-            minute="{{ctrl.props.minuteToTravel}}"
-            hour="{{ctrl.props.hourToTravel}}"></ria-flip-clock>
-            <ria-calendar flex day="{{ctrl.props.dayToTravel}}"></ria-calendar>
+            minute="{{ctrl.props.nextTravel.minute}}"
+            hour="{{ctrl.props.nextTravel.hour}}"></ria-flip-clock>
+            <ria-calendar flex next-travel-data="ctrl.props.nextTravel"></ria-calendar>
           </div>
         </div>
-
-
       </md-card-content>
-
       <md-card-actions layout="row" layout-align-gt-sm="end center" layout-align="center center">
         <md-button class="md-primary big-button" ng-class="{'animated pulse infinite md-raised' : ctrl.props.flightDetails.error}"
           ng-if="!ctrl.props.flightDetails.fetching" ng-click="ctrl.props.stateGo(ctrl.ROUTES.AIRPORT_SEARCH_PAGE)">Let me search again</md-button>

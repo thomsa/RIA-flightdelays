@@ -70,15 +70,14 @@ export default function airport(state = defaultState, action) {
   }
 }
 
-function filterAirports(array, query) {
-  let items = [];
+function filterAirports(array = [], query) {
   if (array) {
     const lowercase = query.toLowerCase();
-    items = array.filter(value => {
-      return value.code.toLowerCase().indexOf(lowercase) >= 0 ||
-      value.country_name.toLowerCase().indexOf(lowercase) >= 0 ||
-      value.name.toLowerCase().indexOf(lowercase) >= 0;
-    });
+    return array.filter(({code, name, country_name: country}) =>
+      code.toLowerCase().includes(lowercase) ||
+      country.toLowerCase().includes(lowercase) ||
+      name.toLowerCase().includes(lowercase)
+    );
   }
-  return items;
+  return [];
 }

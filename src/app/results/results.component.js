@@ -32,35 +32,14 @@ class ResultsController {
   }
 
   mapStateToThis(state) {
-    let monthToTravel;
-    let dayToTravel;
-    let timeToTravel;
-    let hourToTravel;
-    let minuteToTravel;
+    let nextTravel = {};
 
     if (state.flightDetails && state.flightDetails.minimumDelay) {
-      dayToTravel = new Date(state.flightDetails.minimumDelay.FL_DATE).getDate();
-      timeToTravel = helpers.getReadableTimeFromInt(state.flightDetails.minimumDelay.CRS_DEP_TIME);
-      hourToTravel = timeToTravel.slice(0, 2);
-      minuteToTravel = timeToTravel.slice(3);
-      // TODO: MOVE THIS OUT TO A SERVICE
-      const Calendar = new Date();
-      const currentMonth = Calendar.getMonth();
-      const today = Calendar.getDate();
-
-      if (dayToTravel >= today) {
-        monthToTravel = globals.MONTHS[currentMonth];
-      } else {
-        monthToTravel = globals.MONTHS[currentMonth + 1];
-      }
+      nextTravel = helpers.getNextTravelInfoFromFlighDetailWithMinimumDelay(state.flightDetails.minimumDelay);
     }
 
     return {
-      timeToTravel,
-      dayToTravel,
-      minuteToTravel,
-      hourToTravel,
-      monthToTravel,
+      nextTravel,
       ui: state.ui,
       flightDetails: state.flightDetails,
       router: state.router

@@ -2,7 +2,7 @@
   <div class="month">
     <ul>
       <li>
-        {{ctrl.month}}
+        {{ctrl.nextTravelData.monthText}}
       </li>
     </ul>
   </div>
@@ -17,6 +17,6 @@
   </ul>
   <ul class="days">
     <li ng-repeat="item in ctrl.startingDayOfTheMonth track by $index"> </li>
-    <li ng-repeat="item in ctrl.daysInMonth track by $index" ng-class="{active : (($index + 1) == ctrl.day)}">{{$index + 1}}</li>
+    <li ng-repeat="item in ctrl.daysInMonth track by $index" ng-class="{active : (($index + 1) == ctrl.nextTravelData.day)}">{{$index + 1}}</li>
   </ul>
 </div>
