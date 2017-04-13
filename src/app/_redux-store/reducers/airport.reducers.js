@@ -15,56 +15,56 @@ const defaultState = {
 export default function airport(state = defaultState, action) {
   switch (action.type) {
     case types.AIRPORTS_FETCH:
-      return Object.assign({}, state, {
+      return {...state,
         fetchingAirports: true
-      });
+      };
     case types.AIRPORTS_FETCH_ERROR:
-      return Object.assign({}, state, {
+      return {...state,
         fetchingAirports: false,
         error: action.error
-      });
+      };
     case types.AIRPORTS_FETCH_SUCCESS:
-      return Object.assign({}, state, {
+      return {...state,
         fetchingAirports: false,
         allAirports: action.data,
         filteredOriginAirports: action.data,
         error: undefined
-      });
+      };
     case types.SET_DESTINATION_AIRPORT:
-      return Object.assign({}, state, {
+      return {...state,
         selectedDestination: action.airport
-      });
+      };
     case types.SET_ORIGIN_AIRPORT:
-      return Object.assign({}, state, {
+      return {...state,
         selectedOrigin: action.airport,
         selectedDestination: undefined,
         connectedAirports: [],
         filteredDestinationAirports: []
-      });
+      };
     case types.CONNECTED_AIRPORTS_FETCH:
-      return Object.assign({}, state, {
+      return {...state,
         fetchingConnectedAirports: true
-      });
+      };
     case types.CONNECTED_AIRPORTS_FETCH_ERROR:
-      return Object.assign({}, state, {
+      return {...state,
         fetchingConnectedAirports: false,
         error: action.error
-      });
+      };
     case types.CONNECTED_AIRPORTS_FETCH_SUCCESS:
-      return Object.assign({}, state, {
+      return {...state,
         fetchingConnectedAirports: false,
         connectedAirports: action.data,
         filteredDestinationAirports: action.data,
         error: undefined
-      });
+      };
     case types.FILTER_ORIGIN_AIRPORTS:
-      return Object.assign({}, state, {
+      return {...state,
         filteredOriginAirports: filterAirports(state.allAirports, action.query)
-      });
+      };
     case types.FILTER_DESTINATION_AIRPORTS:
-      return Object.assign({}, state, {
+      return {...state,
         filteredDestinationAirports: filterAirports(state.connectedAirports, action.query)
-      });
+      };
     default:
       return state;
   }

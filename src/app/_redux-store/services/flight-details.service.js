@@ -1,5 +1,5 @@
 import * as flightDetailsActions from '../../_redux-store/actions/flight-details.actions';
-const basePath = '/data/';
+const basePath = '/data';
 
 /** @ngInject */
 export function FlightDetailsService($http, $q, $log, $timeout) {
@@ -9,7 +9,7 @@ export function FlightDetailsService($http, $q, $log, $timeout) {
       $timeout(() => {
         $http({
           method: 'GET',
-          url: basePath + (origin + '_' + destination + '.json')
+          url: `${basePath}/${origin}_${destination}.json`
         }).then(response => {
           // get object with minimum delay time
           const min = response.data.reduce((prev, current) => {
@@ -31,7 +31,7 @@ export function FlightDetailsService($http, $q, $log, $timeout) {
       dispatch(flightDetailsActions.delayDistanceCorrelationFetchStart());
       $http({
         method: 'GET',
-        url: basePath + ('delay_distance/delay_distance.json')
+        url: `${basePath}/delay_distance/delay_distance.json`
       }).then(response => {
         console.table(response.data);
         dispatch(flightDetailsActions.setDelayDistanceCorrelation(response.data));

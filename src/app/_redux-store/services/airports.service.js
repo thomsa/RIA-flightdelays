@@ -1,5 +1,5 @@
 import * as airportActions from '../../_redux-store/actions/airport.actions';
-const basePath = '/data/';
+const basePath = '/data';
 
 /** @ngInject */
 export function AirportService($http, $q, $log) {
@@ -8,7 +8,7 @@ export function AirportService($http, $q, $log) {
       dispatch(airportActions.fetchAirportsStart());
       $http({
         method: 'GET',
-        url: basePath + ('/airport_lookup/airports.json')
+        url: `${basePath}/airport_lookup/airports.json`
       }).then(response => {
         const result = response.data.map(element => {
           const newElement = element;
@@ -28,7 +28,7 @@ export function AirportService($http, $q, $log) {
         dispatch(airportActions.fetchConnectedAirportsStart());
         $http({
           method: 'GET',
-          url: basePath + ('/airport_lookup/connected_airports.json')
+          url: `${basePath}/airport_lookup/connected_airports.json`
         }).then(response => {
           const connectedAirports = response.data[originAirport.code];
           if (connectedAirports) {
