@@ -18,6 +18,9 @@ gulp.task('serve:dist', gulp.series('default', 'browsersync:dist'));
 gulp.task('default', gulp.series('clean', 'build'));
 gulp.task('watch', watch);
 
+gulp.task('webdriver-start', gulp.series('webdriver_update', 'webdriver_standalone'));
+gulp.task('test:e2e', gulp.series('protractor'));
+
 function reloadBrowserSync(cb) {
   browserSync.reload();
   cb();

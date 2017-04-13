@@ -1,4 +1,6 @@
 const webpack = require('webpack');
+const path = require('path');
+
 module.exports = {
   module: {
     loaders: [
@@ -36,6 +38,9 @@ module.exports = {
     new webpack.LoaderOptionsPlugin({
       options: {},
       debug: true
+    }),
+    new webpack.DefinePlugin({
+      ENV: require(path.join(__dirname, './env', 'test.js'))
     })
   ],
   devtool: 'source-map'
