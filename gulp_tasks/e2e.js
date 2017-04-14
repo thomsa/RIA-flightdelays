@@ -1,6 +1,7 @@
 'use strict';
 const gulp = require('gulp');
 
+const open = require('gulp-open');
 // The protractor task
 const protractor = require('gulp-protractor').protractor;
 
@@ -20,6 +21,8 @@ gulp.task('webdriver_update', webdriverUpdate({
 // seleniumServerJar in your protractor.conf.js
 gulp.task('webdriver_standalone', webdriverStandalone);
 
+gulp.task('protractor-open-report', protractorOpenReport);
+
 // Setting up the test task
 gulp.task('protractor', () => {
   return gulp.src(['./e2e/**.js']).pipe(protractor({
@@ -30,3 +33,7 @@ gulp.task('protractor', () => {
   }));
 });
 
+function protractorOpenReport() {
+  return gulp.src(['./e2e/**/report.html'])
+  .pipe(open());
+}

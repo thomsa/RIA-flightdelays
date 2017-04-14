@@ -1,7 +1,7 @@
 ﻿const HtmlScreenshotReporter = require('protractor-jasmine2-screenshot-reporter');
 
 const reporter = new HtmlScreenshotReporter({
-  dest: 'e2e/screenshots',
+  dest: 'e2e/report',
   filename: 'report.html',
   captureOnlyFailedSpecs: true,
   reportOnlyFailedSpecs: false,

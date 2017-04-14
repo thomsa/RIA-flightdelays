@@ -43,5 +43,5 @@ module.exports = {
       ENV: require(path.join(__dirname, './env', 'test.js'))
     })
   ],
-  devtool: 'source-map'
+  devtool: 'inline-source-map'
 };

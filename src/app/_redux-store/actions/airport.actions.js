@@ -25,7 +25,7 @@ function fetchAirportsStart() {
 
 function airportsError(error) {
   return {
-    type: types.AIRPORTS_FETCH_SUCCESS,
+    type: types.AIRPORTS_FETCH_ERROR,
     error
   };
 }
@@ -80,11 +80,11 @@ export function filterDestinationAirport(query) {
 const basePath = '/data';
 
 /** @ngInject */
-export default function AirportService($http, $q) {
+export default function AirportService($http) {
   function getAllAirports() {
     return dispatch => {
       dispatch(fetchAirportsStart());
-      $http({
+      return $http({
         method: 'GET',
         url: `${basePath}/airport_lookup/airports.json`
       }).then(response => {
@@ -104,7 +104,7 @@ export default function AirportService($http, $q) {
     return (dispatch, getState) => {
       if (originAirport) {
         dispatch(fetchConnectedAirportsStart());
-        $http({
+        return $http({
           method: 'GET',
           url: `${basePath}/airport_lookup/connected_airports.json`
         }).then(response => {
@@ -121,10 +121,9 @@ export default function AirportService($http, $q) {
         }, error => {
           dispatch(connectedAirportsError(error));
         });
-      } else {
-        dispatch(setDestinationAirport(undefined));
-        dispatch(receiveConnectedAirports([]));
       }
+      dispatch(setDestinationAirport(undefined));
+      dispatch(receiveConnectedAirports([]));
     };
   }
 

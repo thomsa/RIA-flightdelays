@@ -3,14 +3,21 @@ const conf = require('./gulp.conf');
 module.exports = function (config) {
   const configuration = {
     basePath: '../',
-    singleRun: true,
-    autoWatch: false,
+    singleRun: false,
+    autoWatch: true,
     logLevel: 'INFO',
     junitReporter: {
       outputDir: 'test-reports'
     },
+
+    customLaunchers: {
+      ChromeDebugging: {
+        base: 'Chrome',
+        flags: ['--remote-debugging-port=9222']
+      }
+    },
     browsers: [
-      'PhantomJS'
+      'ChromeDebugging'
     ],
     frameworks: [
       'jasmine'
@@ -22,13 +29,10 @@ module.exports = function (config) {
     ],
     preprocessors: {
       [conf.path.src('index.spec.js')]: [
-        'webpack'
+        'webpack', 'sourcemap'
       ],
       [conf.path.src('**/*.html')]: [
         'ng-html2js'
-      ],
-      '/src/app/**/!(*spec)': [
-        'webpack', 'coverage'
       ]
     },
     ngHtml2JsPreprocessor: {
@@ -48,9 +52,11 @@ module.exports = function (config) {
       require('karma-junit-reporter'),
       require('karma-coverage'),
       require('karma-phantomjs-launcher'),
+      require('karma-chrome-launcher'),
       require('karma-phantomjs-shim'),
       require('karma-ng-html2js-preprocessor'),
-      require('karma-webpack')
+      require('karma-webpack'),
+      require('karma-sourcemap-loader')
     ]
   };
 
