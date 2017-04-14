@@ -24,13 +24,13 @@ gulp.task('webdriver_standalone', webdriverStandalone);
 gulp.task('protractor-open-report', protractorOpenReport);
 
 // Setting up the test task
-gulp.task('protractor', () => {
+gulp.task('protractor', cb => {
   return gulp.src(['./e2e/**.js']).pipe(protractor({
     configFile: './e2e/config/conf.js',
     args: [
       '--suite', 'regression'
     ]
-  }));
+  }).on('error', cb));
 });
 
 function protractorOpenReport() {
