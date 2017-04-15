@@ -13,7 +13,6 @@ class DelayRatioChartController {
       const groupToDates = helpers.groupFlightDetailsToDate(chartData);
 
       const seriesData = [];
-      let i = 0;
       for (const key in groupToDates) {
         if (groupToDates[key]) {
           const group = groupToDates[key];
@@ -29,7 +28,6 @@ class DelayRatioChartController {
             name: new Date(key).getDate(),
             y: parseInt((delaysSum / elapsedTimeSum * 100), 10)
           });
-          i++;
         }
       }
 

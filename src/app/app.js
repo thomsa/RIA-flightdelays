@@ -1,6 +1,7 @@
 import './app.scss';
-// DI
 import angular from 'angular';
+
+// DI
 
 // CORE
 import core from './_core';

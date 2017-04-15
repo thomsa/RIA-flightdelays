@@ -1,6 +1,6 @@
 <div layout="row" layout-align="center center" class="animated bounceInUp">
   <div flex="100">
-    <md-card style="background-color:rgba(255,255,255,0.95)">
+    <md-card class="opaque-white">
       <md-card-title layout="column" layout-align="center center">
         <md-card-title-text>
           <h2>{{ctrl.$stateParams.originCode}} - {{ctrl.$stateParams.destinationCode}}</h2>
@@ -11,8 +11,8 @@
           <md-progress-circular md-mode="indeterminate" ng-show="ctrl.props.flightDetails.fetching"></md-progress-circular>
         </div>
         <div layout="column" layout-align="center center" ng-if="ctrl.props.flightDetails.error" class="animated fadeInDown">
-          <h3 style="text-align:center">We are sorry, it seems we don't have the neccessary data to show you the details between these two airports.</h3>
-          <i style="font-size:5em;" class="fa fa-frown-o" aria-hidden="true"></i>
+          <h3 class="text-center">We are sorry, it seems we don't have the neccessary data to show you the details between these two airports.</h3>
+          <i  class="text-big fa fa-frown-o" aria-hidden="true"></i>
         </div>
         <div layout="column" ng-if="ctrl.props.flightDetails.data" layout-align="center center">
           <p>According to our data you can expect the following delay times on your flight per each day. You can click on a day to see the details by each flight!</p>

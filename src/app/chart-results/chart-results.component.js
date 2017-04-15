@@ -21,24 +21,7 @@ class ChartResultsController {
   }
 
   mapStateToThis(state) {
-    let monthToTravel;
-    let dayToTravel;
-    if (state.delay && state.delay.minimumDelay) {
-      dayToTravel = new Date(state.delay.minimumDelay.FL_DATE).getDate();
-      // TODO: MOVE THIS OUT TO A SERVICE
-      const Calendar = new Date();
-      const currentMonth = Calendar.getMonth();    // Returns month (0-11)
-      const today = Calendar.getDate();    // Returns day (1-31)
-
-      if (dayToTravel >= today) {
-        monthToTravel = this.months[currentMonth];
-      } else {
-        monthToTravel = this.months[currentMonth + 1];
-      }
-    }
     return {
-      dayToTravel,
-      monthToTravel,
       ui: state.ui,
       flightDetails: state.flightDetails,
       router: state.router
