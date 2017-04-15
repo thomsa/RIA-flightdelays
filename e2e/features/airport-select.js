@@ -49,6 +49,7 @@ describe('airport select page', () => {
   describe('destination input', () => {
     beforeEach(() => {
       airportsPage.searchAndSelectFirstOrigin('Albuque');
+      browser.sleep(1500);
     });
 
     describe('when i click on destination airport', () => {

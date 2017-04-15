@@ -3,14 +3,13 @@ import * as stateActions from 'redux-ui-router';
 
 class AirportSelectController {
   /** @ngInject */
-  constructor($ngRedux, $scope, $mdMedia, riaAirportActions, riaUiActions) {
+  constructor($ngRedux, $scope, $mdMedia, riaAirportActions) {
     this.props = {};
     this.$mdMedia = $mdMedia;
     const unsubscribe = $ngRedux.connect(this.mapStateToThis,
        Object.assign({},
         stateActions,
-        riaAirportActions,
-        riaUiActions))(this.props);
+        riaAirportActions))(this.props);
     $scope.$on('$destroy', unsubscribe);
   }
 
@@ -28,13 +27,6 @@ class AirportSelectController {
           destinationCode: this.props.airports.selectedDestination.code
         });
     }
-  }
-
-  getNotFoundMessageForDest() {
-    if (this.props.airports.selectedOrigin && !this.props.airports.connectedAirports) {
-      return 'Sorry, no connected airports were found for this origin';
-    }
-    return 'No such airport was found in our database';
   }
 
   mapStateToThis(state) {

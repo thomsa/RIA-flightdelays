@@ -3,11 +3,42 @@ import thunk from 'redux-thunk';
 import angular from 'angular';
 import 'angular-mocks';
 
+import * as helpers from '../helpers';
+
 import riaReduxStore from '../../index';
-import * as actions from '../../actions/airport.actions';
+import {types} from '../../actions/airport.actions';
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
+
+const airports = [
+  {
+    code: 'ABQ',
+    name: 'Albuquerque International',
+    country_name: 'United States',
+    display: 'Albuquerque International, United States, ABQ'
+  },
+  {
+    code: 'LAX',
+    name: 'Los Angeles International',
+    country_name: 'United States',
+    display: 'Los Angeles International, United States, LAX'
+  }
+];
+const connectedAirport = [{
+  code: 'LAX',
+  name: 'Los Angeles International',
+  country_name: 'United States',
+  display: 'Los Angeles International, United States, LAX'
+}];
+const connectedAirportCodes = {
+  ABQ: [
+    'LAX',
+    'OAK',
+    'SAN',
+    'SFO'
+  ]
+};
 
 describe('airport actions', () => {
   let mockriaAirportActions;
@@ -25,7 +56,7 @@ describe('airport actions', () => {
       code: 'test'
     };
     const expectedAction = [{
-      type: actions.types.SET_DESTINATION_AIRPORT,
+      type: types.SET_DESTINATION_AIRPORT,
       airport
     }];
 
@@ -41,7 +72,7 @@ describe('airport actions', () => {
       code: 'test'
     };
     const expectedAction = [{
-      type: actions.types.SET_ORIGIN_AIRPORT,
+      type: types.SET_ORIGIN_AIRPORT,
       airport
     }];
     store.subscribe(() => {
@@ -51,35 +82,45 @@ describe('airport actions', () => {
     store.dispatch(mockriaAirportActions.setOriginAirport(airport));
   });
 
-  describe('async', () => {
-    const airport = [
-      {
-        code: 'ABQ',
-        name: 'Albuquerque International',
-        country_name: 'United States',
-        display: 'Albuquerque International, United States, ABQ'
-      },
-      {
-        code: 'LAX',
-        name: 'Los Angeles International',
-        country_name: 'United States',
-        display: 'Los Angeles International, United States, LAX'
-      }
-    ];
-    const connectedAirport = [{
-      code: 'LAX',
-      name: 'Los Angeles International',
+  it('should filter the correct origin airport', () => {
+    const filteredAirports = [{
+      code: 'ABQ',
+      name: 'Albuquerque International',
       country_name: 'United States',
-      display: 'Los Angeles International, United States, LAX'
+      display: 'Albuquerque International, United States, ABQ'
     }];
-    const connectedAirportCodes = {
-      ABQ: [
-        'LAX',
-        'OAK',
-        'SAN',
-        'SFO'
-      ]
-    };
+    const expectedAction = [{
+      type: types.FILTER_ORIGIN_AIRPORTS,
+      data: filteredAirports
+    }];
+    const store = mockStore({airport: {allAirports: airports}});
+    store.subscribe(() => {
+      expect(store.getActions()).toEqual(expectedAction);
+    });
+
+    store.dispatch(mockriaAirportActions.filterOriginAirport('Albu'));
+  });
+
+  it('should filter the correct destination airport', () => {
+    const filteredAirports = [{
+      code: 'ABQ',
+      name: 'Albuquerque International',
+      country_name: 'United States',
+      display: 'Albuquerque International, United States, ABQ'
+    }];
+    const expectedAction = [{
+      type: types.FILTER_DESTINATION_AIRPORTS,
+      data: filteredAirports
+    }];
+    const store = mockStore({airport: {connectedAirports: airports}});
+    store.subscribe(() => {
+      expect(store.getActions()).toEqual(expectedAction);
+    });
+
+    store.dispatch(mockriaAirportActions.filterDestinationAirport('Albu'));
+  });
+
+  describe('async', () => {
     let httpBackend;
     beforeEach(() => {
       angular.mock.inject($httpBackend => {
@@ -88,13 +129,13 @@ describe('airport actions', () => {
     });
 
     it('creates AIRPORTS_FETCH_SUCCESS with data when fetching airports has been done', () => {
-      httpBackend.when('GET', '/data/airport_lookup/airports.json').respond(airport);
+      httpBackend.when('GET', '/data/airport_lookup/airports.json').respond(airports);
 
       const expectedActions = [
-        {type: actions.types.AIRPORTS_FETCH},
+        {type: types.AIRPORTS_FETCH},
         {
-          type: actions.types.AIRPORTS_FETCH_SUCCESS,
-          data: airport
+          type: types.AIRPORTS_FETCH_SUCCESS,
+          data: airports
         }
       ];
       const store = mockStore({});
@@ -110,21 +151,18 @@ describe('airport actions', () => {
       httpBackend.when('GET', '/data/airport_lookup/airports.json').respond(404, 'mock error');
 
       const expectedActions = [
-        {type: actions.types.AIRPORTS_FETCH},
+        {type: types.AIRPORTS_FETCH},
         {
-          type: actions.types.AIRPORTS_FETCH_ERROR,
+          type: types.AIRPORTS_FETCH_ERROR,
           error: {
             data: 'mock error'
           }
         }
       ];
-      const store = mockStore({airport: {allAirports: airport}});
+      const store = mockStore({airport: {allAirports: airports}});
 
       store.dispatch(mockriaAirportActions.getAllAirports()).then(() => {
-        const finalActions = store.getActions();
-        const tempData = finalActions[1].error.data;
-        finalActions[1].error = {data: tempData};
-        expect(finalActions).toEqual(expectedActions);
+        expect(helpers.getErrorDataFromActions(store)).toEqual(expectedActions);
       });
 
       httpBackend.flush();
@@ -134,13 +172,13 @@ describe('airport actions', () => {
       httpBackend.when('GET', '/data/airport_lookup/connected_airports.json').respond(connectedAirportCodes);
 
       const expectedActions = [
-        {type: actions.types.CONNECTED_AIRPORTS_FETCH},
+        {type: types.CONNECTED_AIRPORTS_FETCH},
         {
-          type: actions.types.CONNECTED_AIRPORTS_FETCH_SUCCESS,
+          type: types.CONNECTED_AIRPORTS_FETCH_SUCCESS,
           data: connectedAirport
         }
       ];
-      const store = mockStore({airport: {allAirports: airport}});
+      const store = mockStore({airport: {allAirports: airports}});
 
       store.dispatch(mockriaAirportActions.getConnectedAirports({code: 'ABQ'})).then(() => {
         expect(store.getActions()).toEqual(expectedActions);
@@ -149,25 +187,67 @@ describe('airport actions', () => {
       httpBackend.flush();
     });
 
+    it('returns empty array if there are no connected airports to the origin', () => {
+      httpBackend.when('GET', '/data/airport_lookup/connected_airports.json').respond(connectedAirportCodes);
+
+      const expectedActions = [
+        {
+          type: types.CONNECTED_AIRPORTS_FETCH
+        },
+        {
+          type: types.CONNECTED_AIRPORTS_FETCH_SUCCESS,
+          data: []
+        }
+      ];
+      const store = mockStore({airport: {allAirports: airports}});
+
+      store.dispatch(mockriaAirportActions.getConnectedAirports({code: 'cant be found airport'})).then(() => {
+        expect(store.getActions()).toEqual(expectedActions);
+      });
+
+      httpBackend.flush();
+    });
+
+    it('returns empty array and sets destination to undefined, if query string is null or empty when fetching connected airports', () => {
+      const expectedActions = [
+        {
+          type: types.SET_DESTINATION_AIRPORT,
+          airport: undefined
+        },
+        {
+          type: types.CONNECTED_AIRPORTS_FETCH_SUCCESS,
+          data: []
+        }
+      ];
+      let dispatchCount = 0;
+      store.subscribe(() => {
+        if (dispatchCount === 0) {
+          expect(store.getActions()).toEqual([expectedActions[0]]);
+        } else if (dispatchCount === 1) {
+          expect(store.getActions()).toEqual(expectedActions);
+        }
+        dispatchCount++;
+      });
+
+      store.dispatch(mockriaAirportActions.getConnectedAirports());
+    });
+
     it('creates CONNECTED_AIRPORTS_FETCH_ERROR with data when fetching connected airports throws error', () => {
       httpBackend.when('GET', '/data/airport_lookup/connected_airports.json').respond(404, 'mock error');
 
       const expectedActions = [
-        {type: actions.types.CONNECTED_AIRPORTS_FETCH},
+        {type: types.CONNECTED_AIRPORTS_FETCH},
         {
-          type: actions.types.CONNECTED_AIRPORTS_FETCH_ERROR,
+          type: types.CONNECTED_AIRPORTS_FETCH_ERROR,
           error: {
             data: 'mock error'
           }
         }
       ];
-      const store = mockStore({airport: {allAirports: airport}});
+      const store = mockStore({airport: {allAirports: airports}});
 
       store.dispatch(mockriaAirportActions.getConnectedAirports({code: 'ABQ'})).then(() => {
-        const finalActions = store.getActions();
-        const tempData = finalActions[1].error.data;
-        finalActions[1].error = {data: tempData};
-        expect(finalActions).toEqual(expectedActions);
+        expect(helpers.getErrorDataFromActions(store)).toEqual(expectedActions);
       });
 
       httpBackend.flush();

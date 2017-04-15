@@ -8,6 +8,6 @@ function config($stateProvider, $urlRouterProvider, $locationProvider) {
   $stateProvider
     .state('notFound', {
       url: '/not-found',
-      templateUrl: './not-found-template/HTTP404.html'
+      template: require('./not-found-template/HTTP404.html')
     });
 }

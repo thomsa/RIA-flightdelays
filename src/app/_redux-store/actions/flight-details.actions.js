@@ -4,10 +4,7 @@ export const types = {
   FLIGHT_DETAILS_FETCH: 'FLIGHT_DETAILS_FETCH_ALL',
   FLIGHT_DETAILS_FETCH_ERROR: 'FLIGHT_DETAILS_FETCH_ERROR',
   FLIGHT_DETAILS_FETCH_SUCCESS: 'FLIGHT_DETAILS_FETCH_SUCCESS',
-  SET_FLIGHT_DATA_WITH_MINIMUM_DELAY: 'SET_FLIGHT_DATA_WITH_MINIMUM_DELAY',
-  FLIGHT_DETAILS_DELAY_TO_DISTANCE_FETCH: 'FLIGHT_DETAILS_DELAY_TO_DISTANCE_FETCH',
-  FLIGHT_DETAILS_DELAY_TO_DISTANCE_FETCH_ERROR: 'FLIGHT_DETAILS_DELAY_TO_DISTANCE_FETCH_ERROR',
-  FLIGHT_DETAILS_DELAY_TO_DISTANCE_FETCH_SUCCESS: 'FLIGHT_DETAILS_DELAY_TO_DISTANCE_FETCH_SUCCESS'
+  SET_FLIGHT_DATA_WITH_MINIMUM_DELAY: 'SET_FLIGHT_DATA_WITH_MINIMUM_DELAY'
 };
 
 function setFlightDetails(data) {
@@ -36,67 +33,28 @@ function setFlightDataWithMiniumumDelay(data) {
   };
 }
 
-function setDelayDistanceCorrelation(data) {
-  return {
-    type: types.FLIGHT_DETAILS_DELAY_TO_DISTANCE_FETCH_SUCCESS,
-    data
-  };
-}
-
-function delayDistanceCorrelationFetchStart() {
-  return {
-    type: types.FLIGHT_DETAILS_DELAY_TO_DISTANCE_FETCH
-  };
-}
-
-function delayDistanceCorrelationFetchError(error) {
-  return {
-    type: types.FLIGHT_DETAILS_DELAY_TO_DISTANCE_FETCH_ERROR,
-    error
-  };
-}
-
 /** @ngInject */
-export default function FlightDetailsActions($http, $q, $log, $timeout) {
+export default function FlightDetailsActions($http) {
   function getFlightData(origin, destination) {
     return dispatch => {
       dispatch(flightDetailsFetchStart());
-      $timeout(() => {
-        $http({
-          method: 'GET',
-          url: `${API_BASE_PATH}/${origin}_${destination}.json`
-        }).then(response => {
-          // get object with minimum delay time
-          const min = response.data.reduce((prev, current) => {
-            return (prev.ARR_DELAY < current.ARR_DELAY) ? prev : current;
-          });
-          dispatch(setFlightDataWithMiniumumDelay(min));
-          dispatch(setFlightDetails(response.data));
-        }, error => {
-          dispatch(flightDetailsFetchError(error));
-        });
-      },
-        3500
-      );
-    };
-  }
-
-  function getAvarageDelayByDistance() {
-    return dispatch => {
-      dispatch(delayDistanceCorrelationFetchStart());
-      $http({
+      return $http({
         method: 'GET',
-        url: `${API_BASE_PATH}/delay_distance/delay_distance.json`
+        url: `${API_BASE_PATH}/${origin}_${destination}.json`
       }).then(response => {
-        dispatch(setDelayDistanceCorrelation(response.data));
+          // get object with minimum delay time
+        const min = response.data.reduce((prev, current) => {
+          return (prev.ARR_DELAY < current.ARR_DELAY) ? prev : current;
+        });
+        dispatch(setFlightDataWithMiniumumDelay(min));
+        dispatch(setFlightDetails(response.data));
       }, error => {
-        dispatch(delayDistanceCorrelationFetchError(error));
+        dispatch(flightDetailsFetchError(error));
       });
     };
   }
 
   return {
-    getFlightData,
-    getAvarageDelayByDistance
+    getFlightData
   };
 }

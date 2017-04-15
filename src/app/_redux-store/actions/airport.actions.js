@@ -65,18 +65,30 @@ function setDestinationAirport(airport) {
   };
 }
 
-function filterOriginAirport(query) {
+function filterOriginAirportAction(data) {
   return {
     type: types.FILTER_ORIGIN_AIRPORTS,
-    query
+    data
   };
 }
 
-function filterDestinationAirport(query) {
+function filterDestinationAirportAction(data) {
   return {
     type: types.FILTER_DESTINATION_AIRPORTS,
-    query
+    data
   };
+}
+
+function filterAirports(array = [], query) {
+  if (array) {
+    const lowercase = query.toLowerCase();
+    return array.filter(({code, name, country_name: country}) =>
+      code.toLowerCase().includes(lowercase) ||
+      country.toLowerCase().includes(lowercase) ||
+      name.toLowerCase().includes(lowercase)
+    );
+  }
+  return [];
 }
 
 /** @ngInject */
@@ -126,6 +138,19 @@ export default function AirportActions($http) {
       dispatch(receiveConnectedAirports([]));
     };
   }
+  function filterDestinationAirport(query) {
+    return (dispatch, getState) => {
+      const state = getState();
+      dispatch(filterDestinationAirportAction(filterAirports(state.airport.connectedAirports, query)));
+    };
+  }
+
+  function filterOriginAirport(query) {
+    return (dispatch, getState) => {
+      const state = getState();
+      dispatch(filterOriginAirportAction(filterAirports(state.airport.allAirports, query)));
+    };
+  }
 
   return {
     getAllAirports,
@@ -136,11 +161,7 @@ export default function AirportActions($http) {
     setDestinationAirport: airport => {
       return dispatch => dispatch(setDestinationAirport(airport));
     },
-    filterOriginAirport: query => {
-      return dispatch => dispatch(filterOriginAirport(query));
-    },
-    filterDestinationAirport: query => {
-      return dispatch => dispatch(filterDestinationAirport(query));
-    }
+    filterOriginAirport,
+    filterDestinationAirport
   };
 }

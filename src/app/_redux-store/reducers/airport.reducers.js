@@ -59,25 +59,13 @@ export default function airport(state = defaultState, action) {
       };
     case types.FILTER_ORIGIN_AIRPORTS:
       return {...state,
-        filteredOriginAirports: filterAirports(state.allAirports, action.query)
+        filteredOriginAirports: action.data
       };
     case types.FILTER_DESTINATION_AIRPORTS:
       return {...state,
-        filteredDestinationAirports: filterAirports(state.connectedAirports, action.query)
+        filteredDestinationAirports: action.data
       };
     default:
       return state;
   }
-}
-
-function filterAirports(array = [], query) {
-  if (array) {
-    const lowercase = query.toLowerCase();
-    return array.filter(({code, name, country_name: country}) =>
-      code.toLowerCase().includes(lowercase) ||
-      country.toLowerCase().includes(lowercase) ||
-      name.toLowerCase().includes(lowercase)
-    );
-  }
-  return [];
 }

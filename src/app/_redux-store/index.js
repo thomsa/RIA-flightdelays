@@ -5,10 +5,9 @@ import thunkMiddleware from 'redux-thunk';
 import reduxStore from './redux-store';
 import airportActions from './actions/airport.actions';
 import flightDetailsActions from './actions/flight-details.actions';
-import uiActions from './actions/ui.actions';
 
 const enhancer = [];
-if (ENV.__DEBUG__) {
+if (ENV.__DEBUG__ && window.devToolsExtension) {
   enhancer.push(window.devToolsExtension());
 }
 
@@ -19,7 +18,6 @@ export default angular
   ])
   .factory('riaAirportActions', airportActions)
   .factory('riaFlightDetailsActions', flightDetailsActions)
-  .factory('riaUiActions', uiActions)
   .config($ngReduxProvider => {
     $ngReduxProvider.createStoreWith(reduxStore, [thunkMiddleware, 'ngUiRouterMiddleware'], enhancer);
   }).name;

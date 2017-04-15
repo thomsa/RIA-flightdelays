@@ -6,37 +6,41 @@ class ChartController {
     this.chart = {};
   }
 
+  createChartDataFromRowData(groupToDates) {
+    let i = 0;
+
+    const seriesData = [];
+    const drillSeries = [];
+
+    for (const key in groupToDates) {
+      if (groupToDates[key]) {
+        const group = groupToDates[key];
+          // push a new array of daily data to drillSeries
+        drillSeries.push({id: i.toString(), data: []});
+          // defined variable to get sum of delays to use it for avarage calculation
+        let delaysSum = 0;
+        group.forEach(element => {
+          delaysSum += element.ARR_DELAY;
+          const drillArr = [];
+          drillArr.push(helpers.getReadableTimeFromInt(element.CRS_DEP_TIME)); // [0] key value
+          drillArr.push(element.ARR_DELAY); // [1] y value
+          drillSeries[i].data.push(drillArr);
+        }, this);
+          // push the daily avarage data
+        seriesData.push({name: new Date(key).getDate(), y: parseInt((delaysSum / group.length), 10), drilldown: i.toString()});
+        i++;
+      }
+    }
+    return {
+      seriesData,
+      drillSeries
+    };
+  }
+
   $onChanges(changes) {
     if (changes.chartData.currentValue) {
-      const chartData = changes.chartData.currentValue;
-      const groupToDates = chartData.reduce((obj, item) => {
-        obj[item.FL_DATE] = obj[item.FL_DATE] || [];
-        obj[item.FL_DATE].push(item);
-        return obj;
-      }, {});
-
-      const seriesData = [];
-      const drillSeries = [];
-      let i = 0;
-      for (const key in groupToDates) {
-        if (groupToDates[key]) {
-          const group = groupToDates[key];
-          // push a new array of daily data to drillSeries
-          drillSeries.push({id: i.toString(), data: []});
-          // defined variable to get sum of delays to use it for avarage calculation
-          let delaysSum = 0;
-          group.forEach(element => {
-            delaysSum += element.ARR_DELAY;
-            const drillArr = [];
-            drillArr.push(helpers.getReadableTimeFromInt(element.CRS_DEP_TIME)); // [0] key value
-            drillArr.push(element.ARR_DELAY); // [1] y value
-            drillSeries[i].data.push(drillArr);
-          }, this);
-          // push the daily avarage data
-          seriesData.push({name: new Date(key).getDate(), y: parseInt((delaysSum / group.length), 10), drilldown: i.toString()});
-          i++;
-        }
-      }
+      const flightDetails = changes.chartData.currentValue;
+      const chartData = this.createChartDataFromRowData(helpers.groupFlightDetailsToDate(flightDetails));
 
       this.chart = {
         chart: {
@@ -97,10 +101,10 @@ class ChartController {
         series: [{
           name: 'Average delay in minutes',
           colorByPoint: true,
-          data: seriesData
+          data: chartData.seriesData
         }],
         drilldown: {
-          series: drillSeries
+          series: chartData.drillSeries
         }
       };
     }

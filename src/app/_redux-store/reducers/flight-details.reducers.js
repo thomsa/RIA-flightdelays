@@ -31,22 +31,6 @@ export default function flightDetails(state = defaultState, action) {
         fetching: false,
         minimumDelay: action.data
       };
-    case types.FLIGHT_DETAILS_DELAY_TO_DISTANCE_FETCH:
-      return {...state,
-        fetching: true,
-        error: undefined
-      };
-    case types.FLIGHT_DETAILS_DELAY_TO_DISTANCE_FETCH_SUCCESS:
-      return {...state,
-        fetching: false,
-        delayDistanceData: action.data,
-        error: undefined
-      };
-    case types.FLIGHT_DETAILS_DELAY_TO_DISTANCE_FETCH_ERROR:
-      return {...state,
-        fetching: false,
-        error: action.error
-      };
     default:
       return state;
   }

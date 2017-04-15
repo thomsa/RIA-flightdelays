@@ -33,7 +33,7 @@ class ResultsController {
     let nextTravel = {};
 
     if (state.flightDetails && state.flightDetails.minimumDelay) {
-      nextTravel = helpers.getNextTravelInfoFromFlighDetailWithMinimumDelay(state.flightDetails.minimumDelay);
+      nextTravel = helpers.getNextTravelInfoFromFlighDetailWithMinimumDelay(state.flightDetails.minimumDelay, new Date());
     }
 
     return {

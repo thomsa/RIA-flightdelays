@@ -1,6 +1,6 @@
 import angular from 'angular';
 import 'angular-mocks';
-import calendar from './calendar';
+import calendar from './calendar.component';
 
 describe('calendar component', () => {
   beforeEach(() => {
