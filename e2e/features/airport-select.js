@@ -4,6 +4,7 @@ const airportsPage = new AirportsPage();
 describe('airport select page', () => {
   beforeEach(() => {
     browser.get('/select-airports');
+    browser.sleep(2000);
   });
 
   describe('when i open the airports page', () => {

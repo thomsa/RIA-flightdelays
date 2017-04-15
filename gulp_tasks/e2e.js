@@ -33,6 +33,16 @@ gulp.task('protractor', cb => {
   }).on('error', cb));
 });
 
+gulp.task('protractor-prod', cb => {
+  return gulp.src(['./e2e/**.js']).pipe(protractor({
+    configFile: './e2e/config/prod.conf.js',
+    args: [
+      '--suite', 'regression'
+    ]
+  }).on('error', cb));
+});
+
+
 function protractorOpenReport() {
   return gulp.src(['./e2e/**/report.html'])
   .pipe(open());

@@ -21,6 +21,7 @@ gulp.task('watch', watch);
 
 gulp.task('webdriver-start', gulp.series('webdriver_update', 'webdriver_standalone'));
 gulp.task('test:e2e', gulp.series('protractor', 'protractor-open-report'));
+gulp.task('test:e2e-prod', gulp.series('protractor-prod', 'protractor-open-report'));
 
 function reloadBrowserSync(cb) {
   browserSync.reload();

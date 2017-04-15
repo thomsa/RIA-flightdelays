@@ -1,7 +1,7 @@
 import {types} from '../actions/ui.actions';
 
 const defaultState = {
-  status: 0
+  status: 'START'
 };
 
 export default function airport(state = defaultState, action) {

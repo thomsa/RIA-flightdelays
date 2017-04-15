@@ -1,28 +1,18 @@
-
+import {ROUTES} from '../../_core/core.globals';
 class PlaneController {
   /** @ngInject */
-  constructor($rootScope, $ngRedux, $scope, $document) {
-    this.props = {};
+  constructor($rootScope, $ngRedux, $document) {
     this.$rootScope = $rootScope;
     this.$document = $document;
-    const unsubscribe = $ngRedux.connect(this.mapStateToThis, {})(this.props);
-    $scope.$on('$destroy', unsubscribe);
   }
   $onInit() {
     this.$rootScope.$on('$stateChangeSuccess', (event, toState) => {
       this.$document.ready(() => {
-        if (!this.landThePlane && toState.name !== 'main.start') {
+        if (!this.landThePlane && toState.name !== ROUTES.START_PAGE) {
           this.landThePlane = true;
         }
       });
     });
-  }
-  // Which part of the Redux global state does our component want to receive?
-  mapStateToThis(state) {
-    return {
-      ui: state.ui,
-      router: state.router
-    };
   }
 }
 

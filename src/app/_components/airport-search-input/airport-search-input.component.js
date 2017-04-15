@@ -1,17 +1,19 @@
-import * as uiActions from '../../_redux-store/actions/ui.actions';
-import * as airportActions from '../../_redux-store/actions/airport.actions';
 
 class AirportSearchInputController {
   /** @ngInject */
-  constructor($ngRedux, $scope, riaAirportService, riaFlightDetailsService) {
+  constructor($ngRedux, $scope, riaAirportActions, riaFlightDetailsActions) {
     this.props = {};
     const unsubscribe = $ngRedux.connect(this.mapStateToThis,
       Object.assign({},
-        airportActions,
-        uiActions,
-        riaAirportService,
-        riaFlightDetailsService))(this.props);
+        riaAirportActions,
+        riaFlightDetailsActions))(this.props);
     $scope.$on('$destroy', unsubscribe);
+  }
+
+  $onInit() {
+    if (this.type !== 'origin' && this.type !== 'destination') {
+      throw new Error('Airport search input supports only "origin" and "destination" as type');
+    }
   }
 
   searchTextChange(searchText) {
@@ -21,6 +23,7 @@ class AirportSearchInputController {
       this.props.filterDestinationAirport(searchText);
     }
   }
+
   setSelectedAirport(item) {
     if (this.type === 'origin') {
       this.props.setOriginAirport(item);

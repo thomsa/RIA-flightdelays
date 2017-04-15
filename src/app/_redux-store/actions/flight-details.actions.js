@@ -1,3 +1,5 @@
+import {API_BASE_PATH} from '../../_core/core.globals';
+
 export const types = {
   FLIGHT_DETAILS_FETCH: 'FLIGHT_DETAILS_FETCH_ALL',
   FLIGHT_DETAILS_FETCH_ERROR: 'FLIGHT_DETAILS_FETCH_ERROR',
@@ -54,17 +56,15 @@ function delayDistanceCorrelationFetchError(error) {
   };
 }
 
-const basePath = '/data';
-
 /** @ngInject */
-export default function FlightDetailsService($http, $q, $log, $timeout) {
+export default function FlightDetailsActions($http, $q, $log, $timeout) {
   function getFlightData(origin, destination) {
-    return (dispatch, getState) => {
+    return dispatch => {
       dispatch(flightDetailsFetchStart());
       $timeout(() => {
         $http({
           method: 'GET',
-          url: `${basePath}/${origin}_${destination}.json`
+          url: `${API_BASE_PATH}/${origin}_${destination}.json`
         }).then(response => {
           // get object with minimum delay time
           const min = response.data.reduce((prev, current) => {
@@ -82,13 +82,12 @@ export default function FlightDetailsService($http, $q, $log, $timeout) {
   }
 
   function getAvarageDelayByDistance() {
-    return (dispatch, getState) => {
+    return dispatch => {
       dispatch(delayDistanceCorrelationFetchStart());
       $http({
         method: 'GET',
-        url: `${basePath}/delay_distance/delay_distance.json`
+        url: `${API_BASE_PATH}/delay_distance/delay_distance.json`
       }).then(response => {
-        console.table(response.data);
         dispatch(setDelayDistanceCorrelation(response.data));
       }, error => {
         dispatch(delayDistanceCorrelationFetchError(error));
@@ -97,6 +96,7 @@ export default function FlightDetailsService($http, $q, $log, $timeout) {
   }
 
   return {
-    getFlightData
+    getFlightData,
+    getAvarageDelayByDistance
   };
 }

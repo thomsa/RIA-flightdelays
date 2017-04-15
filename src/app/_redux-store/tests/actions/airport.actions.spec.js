@@ -1,36 +1,54 @@
-import nock from 'nock';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import angular from 'angular';
 import 'angular-mocks';
 
-import riaReduxStore from '../index';
-import * as actions from '../actions/airport.actions';
+import riaReduxStore from '../../index';
+import * as actions from '../../actions/airport.actions';
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
 describe('airport actions', () => {
+  let mockriaAirportActions;
+  let store;
+  beforeEach(() => {
+    angular.mock.module(riaReduxStore);
+    angular.mock.inject(riaAirportActions => {
+      mockriaAirportActions = riaAirportActions;
+    });
+    store = mockStore({});
+  });
+
   it('should set the correct destination airport', () => {
     const airport = {
       code: 'test'
     };
-    const expectedAction = {
+    const expectedAction = [{
       type: actions.types.SET_DESTINATION_AIRPORT,
       airport
-    };
-    expect(actions.setDestinationAirport(airport)).toEqual(expectedAction);
+    }];
+
+    store.subscribe(() => {
+      expect(store.getActions()).toEqual(expectedAction);
+    });
+
+    store.dispatch(mockriaAirportActions.setDestinationAirport(airport));
   });
 
   it('should set the correct origin airport', () => {
     const airport = {
       code: 'test'
     };
-    const expectedAction = {
+    const expectedAction = [{
       type: actions.types.SET_ORIGIN_AIRPORT,
       airport
-    };
-    expect(actions.setOriginAirport(airport)).toEqual(expectedAction);
+    }];
+    store.subscribe(() => {
+      expect(store.getActions()).toEqual(expectedAction);
+    });
+
+    store.dispatch(mockriaAirportActions.setOriginAirport(airport));
   });
 
   describe('async', () => {
@@ -62,13 +80,9 @@ describe('airport actions', () => {
         'SFO'
       ]
     };
-    let mockRiaAirportService;
     let httpBackend;
-
     beforeEach(() => {
-      angular.mock.module(riaReduxStore);
-      angular.mock.inject((riaAirportService, $httpBackend) => {
-        mockRiaAirportService = riaAirportService;
+      angular.mock.inject($httpBackend => {
         httpBackend = $httpBackend;
       });
     });
@@ -85,7 +99,7 @@ describe('airport actions', () => {
       ];
       const store = mockStore({});
 
-      store.dispatch(mockRiaAirportService.getAllAirports()).then(() => {
+      store.dispatch(mockriaAirportActions.getAllAirports()).then(() => {
         expect(store.getActions()).toEqual(expectedActions);
       });
 
@@ -106,7 +120,7 @@ describe('airport actions', () => {
       ];
       const store = mockStore({airport: {allAirports: airport}});
 
-      store.dispatch(mockRiaAirportService.getAllAirports()).then(() => {
+      store.dispatch(mockriaAirportActions.getAllAirports()).then(() => {
         const finalActions = store.getActions();
         const tempData = finalActions[1].error.data;
         finalActions[1].error = {data: tempData};
@@ -128,7 +142,7 @@ describe('airport actions', () => {
       ];
       const store = mockStore({airport: {allAirports: airport}});
 
-      store.dispatch(mockRiaAirportService.getConnectedAirports({code: 'ABQ'})).then(() => {
+      store.dispatch(mockriaAirportActions.getConnectedAirports({code: 'ABQ'})).then(() => {
         expect(store.getActions()).toEqual(expectedActions);
       });
 
@@ -149,7 +163,7 @@ describe('airport actions', () => {
       ];
       const store = mockStore({airport: {allAirports: airport}});
 
-      store.dispatch(mockRiaAirportService.getConnectedAirports({code: 'ABQ'})).then(() => {
+      store.dispatch(mockriaAirportActions.getConnectedAirports({code: 'ABQ'})).then(() => {
         const finalActions = store.getActions();
         const tempData = finalActions[1].error.data;
         finalActions[1].error = {data: tempData};

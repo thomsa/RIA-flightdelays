@@ -1,18 +1,16 @@
 import * as globals from '../_core/core.globals';
 import * as helpers from '../_core/core.helpers';
-import * as uiActions from '../_redux-store/actions/ui.actions';
 import * as stateActions from 'redux-ui-router';
 
 class ResultsController {
   /** @ngInject */
-  constructor($ngRedux, $scope, riaFlightDetailsService, $stateParams) {
+  constructor($ngRedux, $scope, riaFlightDetailsActions, $stateParams) {
     this.ROUTES = globals.ROUTES;
     this.$stateParams = $stateParams;
     this.props = {};
     const unsubscribe = $ngRedux.connect(this.mapStateToThis,
       Object.assign({},
-        uiActions,
-        riaFlightDetailsService,
+        riaFlightDetailsActions,
         stateActions
         ))(this.props);
     $scope.$on('$destroy', unsubscribe);

@@ -17,7 +17,6 @@ import highChartsng from 'highcharts-ng';
 
 // reusable custom modules
 import config from './core.config';
-import constants from './core.constants';
 
 export default angular
     .module('ria.core.module', [
@@ -32,7 +31,7 @@ export default angular
         /*
          * Reusable cross app modules
          */
-      constants,
+
         /**
          * 3RD PARTY MODULES
          */

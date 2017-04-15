@@ -37,6 +37,7 @@
   this.typeToOriginInput = function (str) {
     browser.waitForAngular();
     element(by.xpath(originInputSelector)).sendKeys(str);
+    browser.waitForAngular();
   };
 
   this.typeToDestInput = function (str) {
@@ -46,30 +47,37 @@
   };
   //* ******* ATTRIBUTE SELECTORS **********/
   this.getOriginInputValue = function () {
+    browser.waitForAngular();
     return element(by.xpath(originInputSelector)).getAttribute('value');
   };
 
   this.getDestInputValue = function () {
+    browser.waitForAngular();
     return element(by.xpath(destInputSelector)).getAttribute('value');
   };
 
   this.originInputIsEnabled = function () {
+    browser.waitForAngular();
     return element(by.xpath(originInputSelector)).isEnabled();
   };
 
   this.destInputIsEnabled = function () {
+    browser.waitForAngular();
     return element(by.xpath(destInputSelector)).isEnabled();
   };
 
   this.showMeButtonIsEnabled = function () {
+    browser.waitForAngular();
     return element(by.id(showMeButtonSelector)).isEnabled();
   };
 
   this.getNumberOfResultsInOriginInput = function () {
+    browser.waitForAngular();
     return element.all(by.xpath(originFirstItemSelector)).count();
   };
 
   this.getNumberOfResultsInDestinationInput = function () {
+    browser.waitForAngular();
     return element.all(by.xpath(destFirstItemSelector)).count();
   };
 
@@ -80,11 +88,13 @@
   };
 
   this.searchAndSelectFirstDest = function (search) {
+    browser.waitForAngular();
     this.typeToDestInput(search);
     this.clickOnFirstDestResult();
   };
 
   this.searchAndSeeResults = function (origin, destination) {
+    browser.waitForAngular();
     this.searchAndSelectFirstOrigin(origin);
     this.searchAndSelectFirstDest(destination);
     this.clickOnShowMeButton();

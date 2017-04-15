@@ -1,3 +1,5 @@
+import {API_BASE_PATH} from '../../_core/core.globals';
+
 export const types = {
   AIRPORTS_FETCH: 'AIRPORTS_FETCH',
   AIRPORTS_FETCH_ERROR: 'AIRPORTS_FETCH_ERROR',
@@ -49,44 +51,42 @@ function connectedAirportsError(error) {
   };
 }
 
-export function setOriginAirport(airport) {
+function setOriginAirport(airport) {
   return {
     type: types.SET_ORIGIN_AIRPORT,
     airport
   };
 }
 
-export function setDestinationAirport(airport) {
+function setDestinationAirport(airport) {
   return {
     type: types.SET_DESTINATION_AIRPORT,
     airport
   };
 }
 
-export function filterOriginAirport(query) {
+function filterOriginAirport(query) {
   return {
     type: types.FILTER_ORIGIN_AIRPORTS,
     query
   };
 }
 
-export function filterDestinationAirport(query) {
+function filterDestinationAirport(query) {
   return {
     type: types.FILTER_DESTINATION_AIRPORTS,
     query
   };
 }
 
-const basePath = '/data';
-
 /** @ngInject */
-export default function AirportService($http) {
+export default function AirportActions($http) {
   function getAllAirports() {
     return dispatch => {
       dispatch(fetchAirportsStart());
       return $http({
         method: 'GET',
-        url: `${basePath}/airport_lookup/airports.json`
+        url: `${API_BASE_PATH}/airport_lookup/airports.json`
       }).then(response => {
         const result = response.data.map(element => {
           const newElement = element;
@@ -106,7 +106,7 @@ export default function AirportService($http) {
         dispatch(fetchConnectedAirportsStart());
         return $http({
           method: 'GET',
-          url: `${basePath}/airport_lookup/connected_airports.json`
+          url: `${API_BASE_PATH}/airport_lookup/connected_airports.json`
         }).then(response => {
           const connectedAirports = response.data[originAirport.code];
           if (connectedAirports) {
@@ -129,6 +129,18 @@ export default function AirportService($http) {
 
   return {
     getAllAirports,
-    getConnectedAirports
+    getConnectedAirports,
+    setOriginAirport: airport => {
+      return dispatch => dispatch(setOriginAirport(airport));
+    },
+    setDestinationAirport: airport => {
+      return dispatch => dispatch(setDestinationAirport(airport));
+    },
+    filterOriginAirport: query => {
+      return dispatch => dispatch(filterOriginAirport(query));
+    },
+    filterDestinationAirport: query => {
+      return dispatch => dispatch(filterDestinationAirport(query));
+    }
   };
 }

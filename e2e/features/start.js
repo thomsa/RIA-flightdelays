@@ -4,6 +4,7 @@ const startPage = new StartPage();
 describe('start page', () => {
   beforeEach(() => {
     browser.get('/');
+    browser.sleep(2000);
   });
 
   describe('when i open the app', () => {
@@ -12,7 +13,7 @@ describe('start page', () => {
     });
   });
 
-  describe('when i on get started', () => {
+  describe('when i click on get started', () => {
     it('it should redirect to flight search page', () => {
       startPage.clickOnStartButton();
       browser.getCurrentUrl().then(url => {
