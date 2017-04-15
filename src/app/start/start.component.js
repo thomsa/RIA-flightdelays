@@ -1,5 +1,4 @@
 import {ROUTES} from '../_core/core.globals';
-import * as uiActions from '../_redux-store/actions/ui.actions';
 import * as stateActions from 'redux-ui-router';
 class StartController {
   /** @ngInject */
@@ -7,13 +6,11 @@ class StartController {
     this.props = {};
     const unsubscribe = $ngRedux.connect(this.mapStateToThis,
       Object.assign({},
-        uiActions,
         stateActions))(this.props);
     $scope.$on('$destroy', unsubscribe);
   }
 
-  getStarteClick() {
-    this.props.getStartedClicked();
+  getStartedClick() {
     this.props.stateGo(ROUTES.AIRPORT_SEARCH_PAGE);
   }
 

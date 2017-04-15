@@ -1,7 +1,7 @@
 ﻿const HtmlScreenshotReporter = require('protractor-jasmine2-screenshot-reporter');
 
 const reporter = new HtmlScreenshotReporter({
-  dest: 'e2e/screenshots',
+  dest: 'e2e/report',
   filename: 'report.html',
   captureOnlyFailedSpecs: true,
   reportOnlyFailedSpecs: false,
@@ -14,7 +14,7 @@ const reporter = new HtmlScreenshotReporter({
 // An example configuration file.
 exports.config = {
   seleniumAddress: 'http://localhost:4444/wd/hub',
-    // main page of application under tests
+  // main page of application under tests
   baseUrl: 'http://localhost:3000/',
 
   params: {
@@ -26,7 +26,7 @@ exports.config = {
   capabilities: {
     browserName: 'chrome',
     shardTestFiles: true,
-    maxInstances: 2,
+    maxInstances: 1,
     chromeOptions: {
             // Get rid of --ignore-certificate yellow warning
       args: ['--no-sandbox']
@@ -43,7 +43,7 @@ exports.config = {
     // protractor is called.
   suites: {
     regression: [
-      '../features/start.js'
+      './regression.js'
     ]
   },
 
@@ -64,8 +64,6 @@ exports.config = {
   onPrepare() {
     browser.driver.manage().window().maximize();
     browser.driver.manage().timeouts().implicitlyWait(5000);
-    const jasmineReporters = require('jasmine-reporters');
-    jasmine.getEnv().addReporter(new jasmineReporters.TeamCityReporter());
     jasmine.getEnv().addReporter(reporter);
 
     const browserLogs = require('protractor-browser-logs');
@@ -79,15 +77,9 @@ exports.config = {
     beforeEach(() => {
       logs.reset();
 
-            // not a bug:
-      logs.ignore('livereload.js?snipver');
-      logs.ignore('Error during WebSocket handshake: net::ERR_CONNECTION_RESET');
-      logs.ignore('Cannot read property \'tweensContainer\'');
-
-            // TODO: try remove after upgrading velocityJS to 1.3.0 or higher as fixing commit: https://github.com/julianshapiro/velocity/commit/59766ffe29c23f3902a864e2b7ef6de7598fee76 is not in any release version yet
-            // note that we are using velocityJS through materialize
-      logs.ignore('tweensContainer');
-
+      // WE CAN IGNORE CONSOLE ERRORS BY SETTING THE STRINGS:
+      // testing wrong airports always shows errors, with backend this wouldn't happen
+      logs.ignore('Failed to load resource: the server responded with a status of 404 (Not Found)');
       logs.ignore(logs.or(logs.WARNING, logs.INFO, logs.DEBUG));
     });
 

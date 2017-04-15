@@ -6,6 +6,7 @@ $black: #1D2731;
 $gold: #D9B310;
 $blue: #328CC1;
 $light-gray : rgb(240, 240, 240);
+$red : red;
 
 @for $i from 1 through 50 {
   .top-#{$i} {
@@ -38,6 +39,27 @@ body {
 
 .md-scroll-mask {
 display: none;
+}
+
+.opaque-white {
+  background-color:rgba(255,255,255,0.95)
+}
+.text-center {
+  text-align:center
+}
+.text-justify {
+  text-align:justify
+}
+
+.text-big {
+  font-size:5em;
+}
+
+.text-medium {
+  font-size:2.5em;
+}
+.red {
+  color: $red;
 }
 
 @import url(https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css);

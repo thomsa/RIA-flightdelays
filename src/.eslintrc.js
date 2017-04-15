@@ -3,15 +3,15 @@ module.exports = {
     'angular'
   ],
   rules: {
-    'angular/no-service-method': 0,
-    'no-unused-vars' : 1,
-    'angular/log' :1,
-    'angular/document-service':1,
-    'angular/window-service':1,
-    'no-loop-func' : 0,
+    'no-unused-vars': 1,
+    'angular/window-service': 2,
+    'no-loop-func': 0,
+    'max-params': 0,
+    'angular/log' : 1,
+    'angular/json-functions' : 1
   },
-  globals: { 
+  globals: {
     "ENV": true,
-    "Highcharts" :true
+    "Highcharts": true
   }
 }

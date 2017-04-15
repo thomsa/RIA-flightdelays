@@ -26,6 +26,9 @@ module.exports = function (config) {
       ],
       [conf.path.src('**/*.html')]: [
         'ng-html2js'
+      ],
+      '/src/app/**/!(*spec)': [
+        'webpack', 'coverage'
       ]
     },
     ngHtml2JsPreprocessor: {

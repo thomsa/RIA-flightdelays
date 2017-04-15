@@ -1,26 +1,22 @@
 import angular from 'angular';
 import 'angular-mocks';
-import fliplock from './flip-clock';
+import flipclock from './flip-clock.component';
 
 describe('flip-clock component', () => {
   beforeEach(() => {
-    angular
-      .module('flipClock', [fliplock]);
-
-    angular.mock.module('flipClock');
+    angular.mock.module(flipclock);
   });
+
   it('should compile', angular.mock.inject(($rootScope, $compile) => {
-    const element = $compile('<flip-clock></flip-clock>')($rootScope);
+    const element = $compile('<ria-flip-clock></ria-flip-clock>')($rootScope);
     $rootScope.$digest();
     expect(element).not.toBeNull();
   }));
 
   it('should have bindings defined', angular.mock.inject(($rootScope, $compile) => {
-    const element = $compile('<flip-clock minute="15" hour="20"></flip-clock>')($rootScope);
+    const element = $compile('<ria-flip-clock minute="15" hour="20"></ria-flip-clock>')($rootScope);
     $rootScope.$digest();
-// controller = $componentController('myComponent', {$scope: scope}, {myBinding: '1.5'});
-    const controller = element.controller('flipClock');
-
+    const controller = element.controller('riaFlipClock');
     expect(controller).toBeDefined();
     expect(controller.minute).toBeDefined();
     expect(controller.minute).toBe('15');
@@ -28,14 +24,14 @@ describe('flip-clock component', () => {
     expect(controller.hour).toBe('20');
   }));
 
-  it('should contain the right minute', angular.mock.inject(($rootScope, $compile) => {
-    const element = $compile('<flip-clock minute="15" hour="20"></flip-clock>')($rootScope);
+  it('should show the right minute', angular.mock.inject(($rootScope, $compile) => {
+    const element = $compile('<ria-flip-clock minute="15" hour="20"></ria-flip-clock>')($rootScope);
     $rootScope.$digest();
     expect(element.html()).toContain('15');
   }));
 
-  it('should contain the right hour', angular.mock.inject(($rootScope, $compile) => {
-    const element = $compile('<flip-clock minute="15" hour="20"></flip-clock>')($rootScope);
+  it('should show the right hour', angular.mock.inject(($rootScope, $compile) => {
+    const element = $compile('<ria-flip-clock minute="15" hour="20"></ria-flip-clock>')($rootScope);
     $rootScope.$digest();
     expect(element.html()).toContain('20');
   }));

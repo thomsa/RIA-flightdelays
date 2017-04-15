@@ -1,6 +1,5 @@
 
 class CalendarController {
-   /** @ngInject */
   $onInit() {
     this.startingDayOfTheMonth = new Array(new Date(this.nextTravelData.year, this.nextTravelData.month, 1).getDay() - 1);
     this.daysInMonth = new Array(new Date(this.nextTravelData.year, this.nextTravelData.month, 0).getDate());

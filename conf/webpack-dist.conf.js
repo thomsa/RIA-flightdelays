@@ -8,7 +8,6 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const pkg = require('../package.json');
 const autoprefixer = require('autoprefixer');
 
-
 module.exports = {
   module: {
     loaders: [
@@ -47,6 +46,10 @@ module.exports = {
       }
     ]
   },
+  node: {
+    fs: 'empty',
+    child_process: 'empty'
+  },
   plugins: [
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
@@ -72,6 +75,10 @@ module.exports = {
       'process.env': {
         NODE_ENV: JSON.stringify('production')
       }
+    }),
+    new webpack.ProvidePlugin({
+      _: 'lodash',
+      fs: 'fs'
     })
   ],
   output: {

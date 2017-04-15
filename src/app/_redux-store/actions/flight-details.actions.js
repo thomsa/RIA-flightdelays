@@ -1,55 +1,60 @@
+import {API_BASE_PATH} from '../../_core/core.globals';
+
 export const types = {
   FLIGHT_DETAILS_FETCH: 'FLIGHT_DETAILS_FETCH_ALL',
   FLIGHT_DETAILS_FETCH_ERROR: 'FLIGHT_DETAILS_FETCH_ERROR',
   FLIGHT_DETAILS_FETCH_SUCCESS: 'FLIGHT_DETAILS_FETCH_SUCCESS',
-  SET_FLIGHT_DATA_WITH_MINIMUM_DELAY: 'SET_FLIGHT_DATA_WITH_MINIMUM_DELAY',
-  FLIGHT_DETAILS_DELAY_TO_DISTANCE_FETCH: 'FLIGHT_DETAILS_DELAY_TO_DISTANCE_FETCH',
-  FLIGHT_DETAILS_DELAY_TO_DISTANCE_FETCH_ERROR: 'FLIGHT_DETAILS_DELAY_TO_DISTANCE_FETCH_ERROR',
-  FLIGHT_DETAILS_DELAY_TO_DISTANCE_FETCH_SUCCESS: 'FLIGHT_DETAILS_DELAY_TO_DISTANCE_FETCH_SUCCESS'
+  SET_FLIGHT_DATA_WITH_MINIMUM_DELAY: 'SET_FLIGHT_DATA_WITH_MINIMUM_DELAY'
 };
 
-export function setFlightDetails(data) {
+function setFlightDetails(data) {
   return {
     type: types.FLIGHT_DETAILS_FETCH_SUCCESS,
     data
   };
 }
-export function flightDetailsFetchStart() {
+function flightDetailsFetchStart() {
   return {
     type: types.FLIGHT_DETAILS_FETCH
   };
 }
 
-export function flightDetailsFetchError(error) {
+function flightDetailsFetchError(error) {
   return {
     type: types.FLIGHT_DETAILS_FETCH_ERROR,
     error
   };
 }
 
-export function setFlightDataWithMiniumumDelay(data) {
+function setFlightDataWithMiniumumDelay(data) {
   return {
     type: types.SET_FLIGHT_DATA_WITH_MINIMUM_DELAY,
     data
   };
 }
 
-export function setDelayDistanceCorrelation(data) {
-  return {
-    type: types.FLIGHT_DETAILS_DELAY_TO_DISTANCE_FETCH_SUCCESS,
-    data
-  };
-}
+/** @ngInject */
+export default function FlightDetailsActions($http) {
+  function getFlightData(origin, destination) {
+    return dispatch => {
+      dispatch(flightDetailsFetchStart());
+      return $http({
+        method: 'GET',
+        url: `${API_BASE_PATH}/${origin}_${destination}.json`
+      }).then(response => {
+          // get object with minimum delay time
+        const min = response.data.reduce((prev, current) => {
+          return (prev.ARR_DELAY < current.ARR_DELAY) ? prev : current;
+        });
+        dispatch(setFlightDataWithMiniumumDelay(min));
+        dispatch(setFlightDetails(response.data));
+      }, error => {
+        dispatch(flightDetailsFetchError(error));
+      });
+    };
+  }
 
-export function delayDistanceCorrelationFetchStart() {
   return {
-    type: types.FLIGHT_DETAILS_DELAY_TO_DISTANCE_FETCH
-  };
-}
-
-export function delayDistanceCorrelationFetchError(error) {
-  return {
-    type: types.FLIGHT_DETAILS_DELAY_TO_DISTANCE_FETCH_ERROR,
-    error
+    getFlightData
   };
 }
