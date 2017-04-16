@@ -1,7 +1,7 @@
 import './app.scss';
 import angular from 'angular';
 
-// DI
+// *** DI ***
 
 // CORE
 import core from './_core';
@@ -13,7 +13,6 @@ import layouts from './layouts';
 import start from './start';
 import airportSelect from './airport-select';
 import results from './results';
-import chartResults from './chart-results';
 
 angular
   .module('riaApp', [
@@ -29,8 +28,7 @@ angular
     layouts,
     start,
     airportSelect,
-    results,
-    chartResults
+    results
   ]);
 
 angular.element(document)

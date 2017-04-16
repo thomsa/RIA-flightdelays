@@ -64,4 +64,13 @@ describe('flight details reducer', () => {
       minimumDelay: testData
     });
   });
+  it('should handle CLEAR_FLIGHT_DATA', () => {
+    expect(
+      reducer([], {
+        type: types.CLEAR_FLIGHT_DATA
+      })
+    ).toEqual({
+      data: undefined
+    });
+  });
 });

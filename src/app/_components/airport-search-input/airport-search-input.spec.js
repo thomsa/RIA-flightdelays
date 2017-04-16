@@ -1,4 +1,3 @@
-import angular from 'angular';
 import 'angular-mocks';
 import riaAirportSearchInput from './airport-search-input.component';
 import reduxStore from '../../_redux-store';

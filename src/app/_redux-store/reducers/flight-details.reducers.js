@@ -31,6 +31,10 @@ export default function flightDetails(state = defaultState, action) {
         fetching: false,
         minimumDelay: action.data
       };
+    case types.CLEAR_FLIGHT_DATA:
+      return {...state,
+        data: undefined
+      };
     default:
       return state;
   }
