@@ -5,8 +5,8 @@ class DelayRatioChartController {
   constructor($timeout) {
     this.chart = {};
     this.$timeout = $timeout;
-    this.selectedPoints = [];
   }
+
   createChartDataFromRowData(groupToDates) {
     const seriesData = [];
     for (const key in groupToDates) {
@@ -31,49 +31,48 @@ class DelayRatioChartController {
     };
   }
 
-  calculatePlotLine(event) {
-    const chart = this.series.chart;
-    let avarage = 0;
-    // we have to remove all plotlines to be able to add the updated one
-    chart.yAxis[0].removePlotLine();
-    // depending on event type add or remove the point from the selected points
-    if (event.type === 'select') {
-      if (event.accumulate) {
-        this.selectedPoints.push(this);
-      } else {
-        this.selectedPoints = [this];
-      }
-    } else if (event.type === 'unselect') {
-      const index = this.selectedPoints.indexOf(this);
-      if (index > -1) {
-        this.selectedPoints.splice(index, 1);
-      }
-    }
-    // create average
-    let ySum = 0;
-    angular.forEach(this.selectedPoints, value => {
-      ySum += value.y;
-    });
-    avarage = parseInt((ySum / this.selectedPoints.length), 10);
-    // add new plotline with new average value
-    chart.yAxis[0].addPlotLine({
-      label: {text: 'Avg Delay Ratio: ' + avarage.toString() + '%'},
-      color: 'black',
-      value: avarage,
-      width: '3',
-      zIndex: 100
-    });
-
-    // redraw the chart to reflect new plotline
-    chart.redraw();
-  }
-
   $onChanges(changes) {
     if (changes.chartData.currentValue) {
       const flightDetails = changes.chartData.currentValue;
       const chartData = this.createChartDataFromRowData(helpers.groupFlightDetailsToDate(flightDetails));
 
-      const calculatePlotLine = event => calculatePlotLine.bind(event);
+      let selectedPoints = [];
+      const calculatePlotLine = function (event) {
+        const chart = this.series.chart;
+        let avarage = 0;
+        // we have to remove all plotlines to be able to add the updated one
+        chart.yAxis[0].removePlotLine();
+        // depending on event type add or remove the point from the selected points
+        if (event.type === 'select') {
+          if (event.accumulate) {
+            selectedPoints.push(this);
+          } else {
+            selectedPoints = [this];
+          }
+        } else if (event.type === 'unselect') {
+          const index = selectedPoints.indexOf(this);
+          if (index > -1) {
+            selectedPoints.splice(index, 1);
+          }
+        }
+        // create average
+        let ySum = 0;
+        angular.forEach(selectedPoints, value => {
+          ySum += value.y;
+        });
+        avarage = parseInt((ySum / selectedPoints.length), 10);
+        // add new plotline with new average value
+        chart.yAxis[0].addPlotLine({
+          label: {text: 'Avg Delay Ratio: ' + avarage.toString() + '%'},
+          color: 'black',
+          value: avarage,
+          width: '3',
+          zIndex: 100
+        });
+
+        // redraw the chart to reflect new plotline
+        chart.redraw();
+      };
 
       this.chart = {
         chart: {
