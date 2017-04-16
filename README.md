@@ -1,5 +1,4 @@
-# RIA-flightdelayscontinue
-
+# RIA-flightdelayscontinue [![Build Status](https://api.travis-ci.org/thomsa/RIA-flightdelays.svg?branch=develop)](https://travis-ci.org/thomsa/RIA-flightdelays/branches)
 ```
 gulp or gulp build  // build dist folder
 gulp serve          // start local development server
