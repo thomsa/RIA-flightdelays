@@ -1,0 +1,13 @@
+sudo: required
+language: node_js
+node_js:
+  - "7.6.0"
+
+install:
+  - npm install
+
+before_script:
+  - npm install -g gulp
+  - npm install -g gulp-cli
+
+script: gulp test
