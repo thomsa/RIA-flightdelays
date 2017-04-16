@@ -1,4 +1,3 @@
-
 import results from './results.component';
 import routes from './results.routes';
 

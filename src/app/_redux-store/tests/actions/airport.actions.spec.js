@@ -1,6 +1,5 @@
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-import angular from 'angular';
 import 'angular-mocks';
 
 import * as helpers from '../helpers';

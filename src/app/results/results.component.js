@@ -24,7 +24,7 @@ class ResultsController {
   }
 
   $onInit() {
-    if (this.$stateParams.originCode && this.$stateParams.destinationCode) {
+    if (!this.props.flightDetails.data && this.$stateParams.originCode && this.$stateParams.destinationCode) {
       this.props.getFlightData(this.$stateParams.originCode, this.$stateParams.destinationCode);
     }
   }
@@ -51,6 +51,7 @@ export default {
   controllerAs: 'ctrl',
   bindings: {
     layout: '@',
-    flex: '@'
+    flex: '@',
+    showChartsTemplate: '<'
   }
 };

@@ -1,12 +1,11 @@
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-import angular from 'angular';
 import 'angular-mocks';
 
 import * as helpers from '../helpers';
 
 import riaReduxStore from '../../index';
-import * as actions from '../../actions/flight-details.actions';
+import {types} from '../../actions/flight-details.actions';
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
@@ -20,6 +19,18 @@ describe('flight details actions', () => {
       mockriaFlightDetailsActions = riaFlightDetailsActions;
     });
     store = mockStore({});
+  });
+
+  it('should send clear flight data action', () => {
+    const expectedAction = [{
+      type: types.CLEAR_FLIGHT_DATA
+    }];
+
+    store.subscribe(() => {
+      expect(store.getActions()).toEqual(expectedAction);
+    });
+
+    store.dispatch(mockriaFlightDetailsActions.clearFlightData());
   });
 
   describe('async', () => {
@@ -38,13 +49,13 @@ describe('flight details actions', () => {
       httpBackend.when('GET', '/data/ABQ_LAX.json').respond(data);
 
       const expectedActions = [
-        {type: actions.types.FLIGHT_DETAILS_FETCH},
+        {type: types.FLIGHT_DETAILS_FETCH},
         {
-          type: actions.types.SET_FLIGHT_DATA_WITH_MINIMUM_DELAY,
+          type: types.SET_FLIGHT_DATA_WITH_MINIMUM_DELAY,
           data: min
         },
         {
-          type: actions.types.FLIGHT_DETAILS_FETCH_SUCCESS,
+          type: types.FLIGHT_DETAILS_FETCH_SUCCESS,
           data
         }
       ];
@@ -61,9 +72,9 @@ describe('flight details actions', () => {
       httpBackend.when('GET', '/data/ABQ_LAX.json').respond(404, 'error');
 
       const expectedActions = [
-        {type: actions.types.FLIGHT_DETAILS_FETCH},
+        {type: types.FLIGHT_DETAILS_FETCH},
         {
-          type: actions.types.FLIGHT_DETAILS_FETCH_ERROR,
+          type: types.FLIGHT_DETAILS_FETCH_ERROR,
           error: {data: 'error'}
         }
       ];

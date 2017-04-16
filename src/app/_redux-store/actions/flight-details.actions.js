@@ -4,7 +4,8 @@ export const types = {
   FLIGHT_DETAILS_FETCH: 'FLIGHT_DETAILS_FETCH_ALL',
   FLIGHT_DETAILS_FETCH_ERROR: 'FLIGHT_DETAILS_FETCH_ERROR',
   FLIGHT_DETAILS_FETCH_SUCCESS: 'FLIGHT_DETAILS_FETCH_SUCCESS',
-  SET_FLIGHT_DATA_WITH_MINIMUM_DELAY: 'SET_FLIGHT_DATA_WITH_MINIMUM_DELAY'
+  SET_FLIGHT_DATA_WITH_MINIMUM_DELAY: 'SET_FLIGHT_DATA_WITH_MINIMUM_DELAY',
+  CLEAR_FLIGHT_DATA: 'CLEAR_FLIGHT_DATA'
 };
 
 function setFlightDetails(data) {
@@ -33,6 +34,12 @@ function setFlightDataWithMiniumumDelay(data) {
   };
 }
 
+function clearFlightData() {
+  return {
+    type: types.CLEAR_FLIGHT_DATA
+  };
+}
+
 /** @ngInject */
 export default function FlightDetailsActions($http) {
   function getFlightData(origin, destination) {
@@ -55,6 +62,9 @@ export default function FlightDetailsActions($http) {
   }
 
   return {
-    getFlightData
+    getFlightData,
+    clearFlightData: () => {
+      return dispatch => dispatch(clearFlightData());
+    }
   };
 }

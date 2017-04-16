@@ -1,20 +1,5 @@
-<div layout="row" layout-align="center center" class="animated bounceInUp">
-  <div flex="100" flex-gt-md="60" flex-md="70">
-    <md-card class="card-opaque">
-      <md-card-title layout="column" layout-align="center center">
-        <md-card-title-text>
-          <h2 id="results-airport-codes">{{ctrl.$stateParams.originCode}} - {{ctrl.$stateParams.destinationCode}}</h2>
-        </md-card-title-text>
-      </md-card-title>
-      <md-card-content layout="column">
-        <div layout="row" layout-sm="column" layout-align="center center">
-          <md-progress-circular md-mode="indeterminate" ng-show="ctrl.props.flightDetails.fetching"></md-progress-circular>
-        </div>
-        <div layout="column" layout-align="center center" ng-if="ctrl.props.flightDetails.error" class="animated fadeInDown">
-          <h3 class="text-center" id="results-error-text">We are sorry, it seems we don't have the neccessary data to show you the details between these two airports.</h3>
-          <i class="text-big fa fa-frown-o"aria-hidden="true"></i>
-        </div>
-        <div layout="column" layout-gt-sm="row" layout-align-gt-sm="space-around " 
+<script type="text/ng-template" id="calendar-template.html">
+ <div layout="column" layout-gt-sm="row" layout-align-gt-sm="space-around " 
         layout-align="space-around" 
         ng-if="!ctrl.props.flightDetails.fetching && ctrl.props.flightDetails.minimumDelay">
           <div flex="100" flex-gt-sm="50">
@@ -27,11 +12,46 @@
             <ria-calendar flex next-travel-data="ctrl.props.nextTravel"></ria-calendar>
           </div>
         </div>
+
+</script>
+
+<script type="text/ng-template" id="charts-template.html">
+  <div layout="column" ng-if="ctrl.props.flightDetails.data" layout-align="center center">
+          <p>According to our data you can expect the following delay times on your flight per each day.</p>
+          <ria-drill-down-chart chart-data="ctrl.props.flightDetails.data"></ria-drill-down-chart>
+          <ria-delay-ratio-chart chart-data="ctrl.props.flightDetails.data"></ria-delay-ratio-chart>
+        </div>
+</script>
+
+<div layout="row" layout-align="center center" class="animated bounceInUp">
+  <div flex="100" ng-class="{'flex-md-70 flex-gt-md-60' : !ctrl.showChartsTemplate}">
+    <md-card class="card-opaque">
+      <md-card-title layout="column" layout-align="center center">
+        <md-card-title-text>
+          <h2 id="results-airport-codes">{{ctrl.$stateParams.originCode}} - {{ctrl.$stateParams.destinationCode}}</h2>
+        </md-card-title-text>
+      </md-card-title>
+      <md-card-content layout="column">
+        <div layout="row" layout-sm="column" layout-align="center center" ng-show="ctrl.props.flightDetails.fetching">
+          <md-progress-circular md-mode="indeterminate" ></md-progress-circular>
+        </div>
+        <div layout="column" layout-align="center center" ng-if="ctrl.props.flightDetails.error" class="animated fadeInDown">
+          <h3 class="text-center" id="results-error-text">We are sorry, it seems we don't have the neccessary data to show you the details between these two airports.</h3>
+          <i class="text-big fa fa-frown-o"aria-hidden="true"></i>
+        </div>
+        <div  ng-if="!ctrl.showChartsTemplate" id="calendar-content" ng-include src="'calendar-template.html'"></div>
+        <div ng-if="ctrl.showChartsTemplate" id="charts-content" ng-include src="'charts-template.html'"></div>
       </md-card-content>
       <md-card-actions layout="row" layout-align-gt-sm="end center" layout-align="center center">
-        <md-button id="let-me-search-button" class="md-primary big-button" ng-class="{'animated pulse infinite md-raised' : ctrl.props.flightDetails.error}"
-          ng-if="!ctrl.props.flightDetails.fetching" ng-click="ctrl.props.stateGo(ctrl.ROUTES.AIRPORT_SEARCH_PAGE)">Let me search again</md-button>
-        <md-button id="how-do-we-know-button" class="md-raised md-warn big-button  animated pulse infinite" ng-click="ctrl.goToChart()" ng-if="!ctrl.props.flightDetails.fetching && !ctrl.props.flightDetails.error">How do we know?</md-button>
+        <md-button ng-if="!ctrl.props.flightDetails.fetching"
+          id="let-me-search-button" 
+          class="md-primary big-button" 
+          ng-class="{'animated pulse infinite md-raised' : ctrl.props.flightDetails.error}"
+          ng-click="ctrl.props.stateGo(ctrl.ROUTES.AIRPORT_SEARCH_PAGE)">Let me search again</md-button>
+        <md-button ng-if="!ctrl.showChartsTemplate && !ctrl.props.flightDetails.fetching && !ctrl.props.flightDetails.error"
+          id="how-do-we-know-button"
+          class="md-raised md-warn big-button animated pulse infinite" 
+          ng-click="ctrl.goToChart()">How do we know?</md-button>
       </md-card-actions>
     </md-card>
   </div>

@@ -3,24 +3,28 @@ import * as stateActions from 'redux-ui-router';
 
 class AirportSelectController {
   /** @ngInject */
-  constructor($ngRedux, $scope, $mdMedia, riaAirportActions) {
+  constructor($ngRedux, $scope, $mdMedia, riaAirportActions, riaFlightDetailsActions) {
     this.props = {};
     this.$mdMedia = $mdMedia;
     const unsubscribe = $ngRedux.connect(this.mapStateToThis,
        Object.assign({},
         stateActions,
-        riaAirportActions))(this.props);
+        riaAirportActions,
+        riaFlightDetailsActions))(this.props);
     $scope.$on('$destroy', unsubscribe);
   }
 
   $onInit() {
-    if (!this.props.airports.allAirports.length) {
+    if (this.props.airports.allAirports.length === 0) {
       this.props.getAllAirports();
     }
   }
 
   submit() {
     if (this.props.airports.selectedOrigin && this.props.airports.selectedDestination) {
+      if (this.props.flightDetails.data) {
+        this.props.clearFlightData();
+      }
       this.props.stateGo(ROUTES.FLIGHT_RESULTS_PAGE,
         {
           originCode: this.props.airports.selectedOrigin.code,
@@ -32,7 +36,8 @@ class AirportSelectController {
   mapStateToThis(state) {
     return {
       airports: state.airport,
-      ui: state.ui
+      ui: state.ui,
+      flightDetails: state.flightDetails
     };
   }
 }

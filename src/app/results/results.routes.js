@@ -14,6 +14,25 @@ function routesConfig($stateProvider) {
         },
         flex() {
           return '100';
+        },
+        showChartsTemplate() {
+          return false;
+        }
+      }
+    })
+    .state(ROUTES.FLIGHT_RESULTS_CHART_PAGE, {
+      url: '/results-chart/:originCode/:destinationCode',
+      component: 'riaResults',
+      resolve: {
+        // this hack has to be done for all containers, otherwise the height won't be flex
+        layout() {
+          return 'column';
+        },
+        flex() {
+          return '100';
+        },
+        showChartsTemplate() {
+          return true;
         }
       }
     });

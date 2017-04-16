@@ -84,12 +84,13 @@
   //* ******* OTHERS **********/
   this.searchAndSelectFirstOrigin = function (search) {
     this.typeToOriginInput(search);
+    browser.sleep(1000);
     this.clickOnFirstOriginResult();
   };
 
   this.searchAndSelectFirstDest = function (search) {
-    browser.waitForAngular();
     this.typeToDestInput(search);
+    browser.sleep(1000);
     this.clickOnFirstDestResult();
   };
 

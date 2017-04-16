@@ -19,4 +19,9 @@
   this.clickLetMeSearchButton = function () {
     element(by.id(letMeSearchButtonSelector)).click();
   };
+
+  this.drillDownClickOnBar = function (day = Number) {
+    browser.actions().click(element(by.xpath(`//*[name()='svg'][1]//*[contains(@class, 'highcharts-series-group')]//*[name()='g'][2]//*[name()='rect'][${day}]`))
+    .getWebElement()).perform();
+  };
 };

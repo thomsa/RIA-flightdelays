@@ -1,4 +1,3 @@
-import angular from 'angular';
 import 'angular-mocks';
 import layouts from './index';
 import reduxStore from '../_redux-store';

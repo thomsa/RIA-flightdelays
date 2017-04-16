@@ -1,4 +1,3 @@
-import angular from 'angular';
 import 'angular-mocks';
 import calendar from './calendar.component';
 
